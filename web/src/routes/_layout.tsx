@@ -5,7 +5,7 @@ import PrivateNavigation from '../shared/navigation/private-navigation';
 
 
 const MyApp = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return (
     <>
       {
