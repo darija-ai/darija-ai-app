@@ -1,22 +1,23 @@
+import { useNavigate } from "@tanstack/react-router";
+
 const LandingPage = () => {
+
+  const navigate = useNavigate()
 
   return (
     <div className=" bg-orange-50 text-gray-900">
       {/* Hero Section */}
       <section className="relative pt-24 overflow-hidden">
-        {/* Background image - covers the entire section */}
         <div className="absolute inset-0 z-0">
           <img
             src="/herosection2.jpg"
             alt="Background"
             className="w-full h-full object-cover"
           />
-          {/* Gradient overlay - uniform dark */}
           <div className="absolute bg-black/40 inset-0"></div>
         </div>
 
         <div className="container mx-auto px-4 py-16 flex flex-col items-center relative z-20 text-center">
-          {/* Centered content */}
           <div className="w-full max-w-2xl text-orange-50 mb-12">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Seamless Arabic Translation
@@ -29,7 +30,7 @@ const LandingPage = () => {
             </p>
 
             <div className="flex flex-col items-center space-y-4 mb-8">
-              <button className="px-6 py-3 bg-cream-50 border-1 font-semibold rounded-lg hover:bg-cream-100 transition-colors whitespace-nowrap">
+              <button onClick={() => navigate({ to: '/sign-in' })} className="px-6 py-3 bg-cream-50 border-1 font-semibold rounded-lg hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer">
                 Start Now
               </button>
             </div>
@@ -61,7 +62,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-burgundy-800 mb-4">
-              Our Translation Services
+              Our Services
             </h2>
             <p className="max-w-2xl mx-auto text-gray-600 text-lg">
               Discover our comprehensive suite of Arabic language AI services
@@ -88,11 +89,10 @@ const LandingPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Text Translation
+                Model 1
               </h3>
               <p className="text-gray-600 mb-4">
-                Instant and accurate translations between English and Arabic for
-                any text content with cultural nuance preservation.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <a
                 href="#"
@@ -133,11 +133,11 @@ const LandingPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Document Translation
+                Model 2
               </h3>
               <p className="text-gray-600 mb-4">
-                Full document translation with formatting preservation for
-                business reports, legal documents, and academic papers.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
               </p>
               <a
                 href="#"
@@ -178,11 +178,10 @@ const LandingPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Content Optimization
+                Model 3
               </h3>
               <p className="text-gray-600 mb-4">
-                AI-powered content optimization for Arabic-speaking audiences,
-                ensuring cultural relevance and engagement.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <a
                 href="#"
@@ -243,11 +242,8 @@ const LandingPage = () => {
             No credit card required.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors">
+            <button onClick={() => navigate({ to: '/sign-in' })} className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors">
               Start Free Trial
-            </button>
-            <button className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors">
-              Schedule Demo
             </button>
           </div>
         </div>

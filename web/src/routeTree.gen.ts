@@ -15,6 +15,8 @@ import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
 import { Route as LayoutpublicServicesImport } from './routes/_layout/(public)/services'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
+import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
+import { Route as LayoutpublicSignInIndexImport } from './routes/_layout/(public)/sign-in/index'
 
 // Create/Update Routes
 
@@ -38,6 +40,18 @@ const LayoutpublicServicesRoute = LayoutpublicServicesImport.update({
 const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   id: '/(protected)/dashboard',
   path: '/dashboard',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicSignUpIndexRoute = LayoutpublicSignUpIndexImport.update({
+  id: '/(public)/sign-up/',
+  path: '/sign-up/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicSignInIndexRoute = LayoutpublicSignInIndexImport.update({
+  id: '/(public)/sign-in/',
+  path: '/sign-in/',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -73,6 +87,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutpublicIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/(public)/sign-in/': {
+      id: '/_layout/(public)/sign-in/'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof LayoutpublicSignInIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(public)/sign-up/': {
+      id: '/_layout/(public)/sign-up/'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof LayoutpublicSignUpIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
@@ -82,12 +110,16 @@ interface LayoutRouteChildren {
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
   LayoutpublicServicesRoute: typeof LayoutpublicServicesRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
+  LayoutpublicSignInIndexRoute: typeof LayoutpublicSignInIndexRoute
+  LayoutpublicSignUpIndexRoute: typeof LayoutpublicSignUpIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
   LayoutpublicServicesRoute: LayoutpublicServicesRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
+  LayoutpublicSignInIndexRoute: LayoutpublicSignInIndexRoute,
+  LayoutpublicSignUpIndexRoute: LayoutpublicSignUpIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -98,12 +130,16 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
+  '/sign-in': typeof LayoutpublicSignInIndexRoute
+  '/sign-up': typeof LayoutpublicSignUpIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
+  '/sign-in': typeof LayoutpublicSignInIndexRoute
+  '/sign-up': typeof LayoutpublicSignUpIndexRoute
 }
 
 export interface FileRoutesById {
@@ -112,19 +148,23 @@ export interface FileRoutesById {
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
   '/_layout/(public)/services': typeof LayoutpublicServicesRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
+  '/_layout/(public)/sign-in/': typeof LayoutpublicSignInIndexRoute
+  '/_layout/(public)/sign-up/': typeof LayoutpublicSignUpIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dashboard' | '/services' | '/'
+  fullPaths: '' | '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
   fileRoutesByTo: FileRoutesByTo
-  to: '/dashboard' | '/services' | '/'
+  to: '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/(protected)/dashboard'
     | '/_layout/(public)/services'
     | '/_layout/(public)/'
+    | '/_layout/(public)/sign-in/'
+    | '/_layout/(public)/sign-up/'
   fileRoutesById: FileRoutesById
 }
 
@@ -154,7 +194,9 @@ export const routeTree = rootRoute
       "children": [
         "/_layout/(protected)/dashboard",
         "/_layout/(public)/services",
-        "/_layout/(public)/"
+        "/_layout/(public)/",
+        "/_layout/(public)/sign-in/",
+        "/_layout/(public)/sign-up/"
       ]
     },
     "/_layout/(protected)/dashboard": {
@@ -167,6 +209,14 @@ export const routeTree = rootRoute
     },
     "/_layout/(public)/": {
       "filePath": "_layout/(public)/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/sign-in/": {
+      "filePath": "_layout/(public)/sign-in/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/sign-up/": {
+      "filePath": "_layout/(public)/sign-up/index.tsx",
       "parent": "/_layout"
     }
   }
