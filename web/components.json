@@ -8,15 +8,16 @@
       "css": "src/styles/globals.css",
       "baseColor": "neutral",
       "cssVariables": true,
-      "prefix": ""
+      "prefix": "./src"
     },
     "aliases": {
-      "features": "@/features",
+      "modules": "@/modules",
       "components": "@/shared/components",
       "utils": "@/lib/utils",
       "ui": "@/shared/components/ui",
       "lib": "@/lib",
-      "hooks": "@/hooks"
+      "hooks": "@/shared/hooks",
+      "shared": "@/shared"
     },
     "iconLibrary": "lucide"
   }

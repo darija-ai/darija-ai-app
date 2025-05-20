@@ -6,8 +6,6 @@ import {
   Settings,
   User2,
   ChevronUp,
-  ChevronRight,
-  ChevronLeft,
 } from "lucide-react";
 
 import {
@@ -20,14 +18,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
-} from "../../../@/shared/components/ui/sidebar";
+} from "@/shared/components/ui/sidebar";
 
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "../../../@/shared/components/ui/dropdown-menu";
+} from "@/shared/components/ui/dropdown-menu";
 
 const items = [
   { title: "Home", url: "#", icon: Home },

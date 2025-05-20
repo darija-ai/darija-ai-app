@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router"
 import { Github } from "lucide-react"
-import { Button } from "../../../@/shared/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../@/shared/components/ui/card"
-import { Input } from "../../../@/shared/components/ui/input"
-import { Label } from "../../../@/shared/components/ui/label"
+import { Button } from "@/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/ui/card"
+import { Input } from "@/ui/input"
+import { Label } from "@/ui/label"
 
 export default function SignIn() {
   return (
