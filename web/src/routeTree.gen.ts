@@ -15,6 +15,7 @@ import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
 import { Route as LayoutpublicServicesImport } from './routes/_layout/(public)/services'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
+import { Route as LayoutprotectedAnnotatorImport } from './routes/_layout/(protected)/annotator'
 import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
 import { Route as LayoutpublicSignInIndexImport } from './routes/_layout/(public)/sign-in/index'
 
@@ -43,6 +44,12 @@ const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutprotectedAnnotatorRoute = LayoutprotectedAnnotatorImport.update({
+  id: '/(protected)/annotator',
+  path: '/annotator',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 const LayoutpublicSignUpIndexRoute = LayoutpublicSignUpIndexImport.update({
   id: '/(public)/sign-up/',
   path: '/sign-up/',
@@ -65,6 +72,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/(protected)/annotator': {
+      id: '/_layout/(protected)/annotator'
+      path: '/annotator'
+      fullPath: '/annotator'
+      preLoaderRoute: typeof LayoutprotectedAnnotatorImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/(protected)/dashboard': {
       id: '/_layout/(protected)/dashboard'
@@ -107,6 +121,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
+  LayoutprotectedAnnotatorRoute: typeof LayoutprotectedAnnotatorRoute
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
   LayoutpublicServicesRoute: typeof LayoutpublicServicesRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
@@ -115,6 +130,7 @@ interface LayoutRouteChildren {
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutprotectedAnnotatorRoute: LayoutprotectedAnnotatorRoute,
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
   LayoutpublicServicesRoute: LayoutpublicServicesRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
@@ -127,6 +143,7 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
+  '/annotator': typeof LayoutprotectedAnnotatorRoute
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
@@ -135,6 +152,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/annotator': typeof LayoutprotectedAnnotatorRoute
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
@@ -145,6 +163,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/(protected)/annotator': typeof LayoutprotectedAnnotatorRoute
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
   '/_layout/(public)/services': typeof LayoutpublicServicesRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
@@ -154,12 +173,20 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
+  fullPaths:
+    | ''
+    | '/annotator'
+    | '/dashboard'
+    | '/services'
+    | '/'
+    | '/sign-in'
+    | '/sign-up'
   fileRoutesByTo: FileRoutesByTo
-  to: '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
+  to: '/annotator' | '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
   id:
     | '__root__'
     | '/_layout'
+    | '/_layout/(protected)/annotator'
     | '/_layout/(protected)/dashboard'
     | '/_layout/(public)/services'
     | '/_layout/(public)/'
@@ -192,12 +219,17 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
+        "/_layout/(protected)/annotator",
         "/_layout/(protected)/dashboard",
         "/_layout/(public)/services",
         "/_layout/(public)/",
         "/_layout/(public)/sign-in/",
         "/_layout/(public)/sign-up/"
       ]
+    },
+    "/_layout/(protected)/annotator": {
+      "filePath": "_layout/(protected)/annotator.tsx",
+      "parent": "/_layout"
     },
     "/_layout/(protected)/dashboard": {
       "filePath": "_layout/(protected)/dashboard.tsx",
