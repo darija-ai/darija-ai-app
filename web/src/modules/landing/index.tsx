@@ -20,8 +20,8 @@ const LandingPage = () => {
         <div className="container mx-auto px-4 py-16 flex flex-col items-center relative z-20 text-center">
           <div className="w-full max-w-2xl text-orange-50 mb-12">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Seamless Arabic Translation
-              <span className="block">Powered by AI.</span>
+              The All in one 
+              <span className="block">Moroccan Arabic LLMs</span>
             </h1>
             <p className="text-lg md:text-xl mb-8 text-cream-100 mx-auto">
               Experience the most accurate and contextually relevant English to
