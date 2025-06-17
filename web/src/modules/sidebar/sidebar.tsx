@@ -1,88 +1,85 @@
+import React, { useState } from 'react';
 import {
   Home,
-  Inbox,
   Settings,
-  User2,
-  ChevronUp,
-} from "lucide-react";
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+  LucideIcon
+} from 'lucide-react';
+import { useNavigate } from '@tanstack/react-router';
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarFooter,
-} from "@/shared/components/ui/sidebar";
+interface MenuItem {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+}
 
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/shared/components/ui/dropdown-menu";
+interface SidebarProps {
+  className?: string;
+}
 
-import { useNavigate } from "@tanstack/react-router";
+const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
+  const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
 
-const items = [
-  { title: "Home", url: "/home", icon: Home },
-  { title: "Annotator", url: "/annotator", icon: Inbox },
-  { title: "Settings", url: "/settings", icon: Settings },
-];
+  const toggleExpanded = () => setIsExpanded(!isExpanded);
 
-export function AppSidebar() {
-
-  const navigate = useNavigate()
+  const menuItems: MenuItem[] = [
+    { icon: Home, label: 'Dashboard', href: '/dashborad' },
+    { icon: FileText, label: 'Speech To Text', href: '/speech-to-text' },
+    { icon: Settings, label: 'Settings', href: '#' },
+  ];
 
   return (
-    <Sidebar className="flex flex-col h-full">
-      <SidebarContent className="flex-1">
-        <SidebarGroup className="h-full flex flex-col">
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent className="flex-1 overflow-y-auto">
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a
-                      href={item.url}
-                      onClick={() => navigate({ to: item.url })}
-                    >
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-          <SidebarFooter className="border-t border-gray-200 mt-auto">
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton>
-                      <User2 /> Username
-                      <ChevronUp className="ml-auto" />
-                    </SidebarMenuButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    side="top"
-                    className="w-[--radix-popper-anchor-width]"
-                  >
-                    <DropdownMenuItem>
-                      <span>Sign out</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+    <nav className={`
+      h-screen transition-all duration-500 ease-in-out
+      ${isExpanded ? 'w-72' : 'w-24'}
+      bg-[#1a365d] flex flex-col ${className}
+    `}>
+      <div className="flex items-center p-4 border-b border-[#2d4a66]">
+        <div className={`transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
+          <h2 className="text-white text-xl font-bold whitespace-nowrap">Brand</h2>
+        </div>
+        <button
+          onClick={toggleExpanded}
+          className={`p-1 rounded text-white hover:bg-[#2d4a66] transition-colors ${!isExpanded ? 'ml-0' : 'ml-auto'}`}
+        >
+          {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+        </button>
+      </div>
+
+      <div className="flex-1 py-4">
+        <ul className="space-y-2 px-3">
+          {menuItems.map((item: MenuItem, index: number) => (
+            <li key={index}>
+              <a
+                href={item.href}
+                className="flex items-center px-3 py-3 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200"
+                title={!isExpanded ? item.label : ''}
+                onClick={() => navigate({ to: item.href })}
+              >
+                <item.icon size={20} className="flex-shrink-0" />
+                <span className={`ml-3 truncate transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
+                  {item.label}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="p-4 border-t border-[#2d4a66]">
+        <div className="flex items-center">
+          <div className="w-8 h-8 bg-gray-400 rounded-full flex-shrink-0" />
+          <div className={`ml-3 min-w-0 transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
+            <p className="text-white text-sm font-medium truncate whitespace-nowrap">John Doe</p>
+            <p className="text-gray-400 text-xs truncate whitespace-nowrap">john@example.com</p>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
-}
+};
+
+export default AppSidebar;

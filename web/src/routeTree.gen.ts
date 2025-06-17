@@ -14,8 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
 import { Route as LayoutpublicServicesImport } from './routes/_layout/(public)/services'
+import { Route as LayoutprotectedSpeechToTextImport } from './routes/_layout/(protected)/speech-to-text'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
-import { Route as LayoutprotectedAnnotatorImport } from './routes/_layout/(protected)/annotator'
 import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
 import { Route as LayoutpublicSignInIndexImport } from './routes/_layout/(public)/sign-in/index'
 
@@ -38,15 +38,16 @@ const LayoutpublicServicesRoute = LayoutpublicServicesImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutprotectedSpeechToTextRoute =
+  LayoutprotectedSpeechToTextImport.update({
+    id: '/(protected)/speech-to-text',
+    path: '/speech-to-text',
+    getParentRoute: () => LayoutRoute,
+  } as any)
+
 const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   id: '/(protected)/dashboard',
   path: '/dashboard',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutprotectedAnnotatorRoute = LayoutprotectedAnnotatorImport.update({
-  id: '/(protected)/annotator',
-  path: '/annotator',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -73,18 +74,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/(protected)/annotator': {
-      id: '/_layout/(protected)/annotator'
-      path: '/annotator'
-      fullPath: '/annotator'
-      preLoaderRoute: typeof LayoutprotectedAnnotatorImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/(protected)/dashboard': {
       id: '/_layout/(protected)/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof LayoutprotectedDashboardImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(protected)/speech-to-text': {
+      id: '/_layout/(protected)/speech-to-text'
+      path: '/speech-to-text'
+      fullPath: '/speech-to-text'
+      preLoaderRoute: typeof LayoutprotectedSpeechToTextImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/(public)/services': {
@@ -121,8 +122,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
-  LayoutprotectedAnnotatorRoute: typeof LayoutprotectedAnnotatorRoute
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
+  LayoutprotectedSpeechToTextRoute: typeof LayoutprotectedSpeechToTextRoute
   LayoutpublicServicesRoute: typeof LayoutpublicServicesRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
   LayoutpublicSignInIndexRoute: typeof LayoutpublicSignInIndexRoute
@@ -130,8 +131,8 @@ interface LayoutRouteChildren {
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutprotectedAnnotatorRoute: LayoutprotectedAnnotatorRoute,
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
+  LayoutprotectedSpeechToTextRoute: LayoutprotectedSpeechToTextRoute,
   LayoutpublicServicesRoute: LayoutpublicServicesRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
   LayoutpublicSignInIndexRoute: LayoutpublicSignInIndexRoute,
@@ -143,8 +144,8 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
-  '/annotator': typeof LayoutprotectedAnnotatorRoute
   '/dashboard': typeof LayoutprotectedDashboardRoute
+  '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
   '/sign-in': typeof LayoutpublicSignInIndexRoute
@@ -152,8 +153,8 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/annotator': typeof LayoutprotectedAnnotatorRoute
   '/dashboard': typeof LayoutprotectedDashboardRoute
+  '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
   '/sign-in': typeof LayoutpublicSignInIndexRoute
@@ -163,8 +164,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/(protected)/annotator': typeof LayoutprotectedAnnotatorRoute
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
+  '/_layout/(protected)/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/_layout/(public)/services': typeof LayoutpublicServicesRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
   '/_layout/(public)/sign-in/': typeof LayoutpublicSignInIndexRoute
@@ -175,19 +176,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/annotator'
     | '/dashboard'
+    | '/speech-to-text'
     | '/services'
     | '/'
     | '/sign-in'
     | '/sign-up'
   fileRoutesByTo: FileRoutesByTo
-  to: '/annotator' | '/dashboard' | '/services' | '/' | '/sign-in' | '/sign-up'
+  to:
+    | '/dashboard'
+    | '/speech-to-text'
+    | '/services'
+    | '/'
+    | '/sign-in'
+    | '/sign-up'
   id:
     | '__root__'
     | '/_layout'
-    | '/_layout/(protected)/annotator'
     | '/_layout/(protected)/dashboard'
+    | '/_layout/(protected)/speech-to-text'
     | '/_layout/(public)/services'
     | '/_layout/(public)/'
     | '/_layout/(public)/sign-in/'
@@ -219,20 +226,20 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
-        "/_layout/(protected)/annotator",
         "/_layout/(protected)/dashboard",
+        "/_layout/(protected)/speech-to-text",
         "/_layout/(public)/services",
         "/_layout/(public)/",
         "/_layout/(public)/sign-in/",
         "/_layout/(public)/sign-up/"
       ]
     },
-    "/_layout/(protected)/annotator": {
-      "filePath": "_layout/(protected)/annotator.tsx",
-      "parent": "/_layout"
-    },
     "/_layout/(protected)/dashboard": {
       "filePath": "_layout/(protected)/dashboard.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(protected)/speech-to-text": {
+      "filePath": "_layout/(protected)/speech-to-text.tsx",
       "parent": "/_layout"
     },
     "/_layout/(public)/services": {

@@ -8,7 +8,7 @@ const checkAuth = () => {
 }
 
 const isProtectedRoute = (pathname: string) => {
-  const protectedPaths = ['/dashboard', '/annotator'];
+  const protectedPaths = ['/dashboard', '/speech-to-text'];
   return protectedPaths.some(path => pathname.startsWith(path));
 }
 
