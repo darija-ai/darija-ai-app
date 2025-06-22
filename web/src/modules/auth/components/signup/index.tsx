@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import { Github } from "lucide-react"
+// import { Github } from "lucide-react"
 import { Button } from "@/shared/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Input } from "@/shared/components/ui/input"
@@ -14,7 +14,7 @@ export default function SignUp() {
           <CardDescription>Enter your information to create an account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
+          <div className="space-y-2 mt-2">
             <Label htmlFor="name">Name</Label>
             <Input id="name" placeholder="John Doe" required />
           </div>
@@ -29,7 +29,7 @@ export default function SignUp() {
           <Button className="w-full" type="submit">
             Create account
           </Button>
-          <div className="relative">
+          {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -40,10 +40,10 @@ export default function SignUp() {
           <Button variant="outline" className="w-full" type="button">
             <Github className="mr-2 h-4 w-4" />
             GitHub
-          </Button>
+          </Button> */}
         </CardContent>
         <CardFooter className="flex justify-center">
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-muted-foreground mt-2">
             Already have an account?{" "}
             <Link to="/sign-in" className="text-primary hover:underline">
               Sign in
