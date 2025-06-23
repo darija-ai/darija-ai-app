@@ -2,11 +2,21 @@ import { PrismaClient, User, UserRole } from '@prisma/client';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { Secret } from 'jsonwebtoken';
-import { SignupDto, LoginDto } from '../dtos/auth.dto';
 import { PasswordUtils } from '../utils/passwordUtils';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+
+export interface SignupDto {
+  username: string;
+  password: string;
+  email?: string;
+}
+
+export interface LoginDto {
+  username: string;
+  password: string;
+}
 
 class AuthService {
   private prisma: PrismaClient;
@@ -38,7 +48,7 @@ class AuthService {
 
     const passwordHash = await PasswordUtils.hashPassword(password);
 
-    const role = email === ADMIN_EMAIL ? UserRole.ADMIN : UserRole.CLIENT;
+    const role = email === ADMIN_EMAIL ? UserRole.ADMIN : UserRole.ANNOTATOR;
 
     const result = await this.prisma.$transaction(async prisma => {
       const user = await prisma.user.create({
@@ -51,34 +61,10 @@ class AuthService {
         },
       });
 
-      if (role === UserRole.CLIENT) {
-        await prisma.client.create({
-          data: {
-            clientId: uuidv4(),
-            userId: user.userId,
-            accountStatus: 'active',
-          },
-        });
-      }
-
-      await prisma.profile.create({
-        data: {
-          profileId: uuidv4(),
-          userId: user.userId,
-          language: 'en',
-          timezone: 'UTC',
-        },
-      });
-
       return user;
     });
 
     const token = this.generateToken(result);
-
-    await this.prisma.user.update({
-      where: { userId: result.userId },
-      data: { lastLogin: new Date() },
-    });
 
     return {
       user: {
@@ -116,11 +102,6 @@ class AuthService {
     }
 
     const token = this.generateToken(user);
-
-    await this.prisma.user.update({
-      where: { userId: user.userId },
-      data: { lastLogin: new Date() },
-    });
 
     return {
       user: {
