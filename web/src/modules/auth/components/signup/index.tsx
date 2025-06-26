@@ -4,8 +4,30 @@ import { Button } from "@/shared/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Input } from "@/shared/components/ui/input"
 import { Label } from "@/shared/components/ui/label"
+import { useState } from "react"
+import { signUp } from "../../api/authApi"
 
 export default function SignUp() {
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true)
+    setError('')
+
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const username = formData.get('username') as string;
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      await signUp(username, email, password);
+    } catch (err) {
+      setError('Failed to sign up')
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-4 bg-orange-50">
       <Card className="w-full max-w-md">
@@ -14,33 +36,23 @@ export default function SignUp() {
           <CardDescription>Enter your information to create an account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2 mt-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="John Doe" required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
-          </div>
-          <Button className="w-full" type="submit">
-            Create account
-          </Button>
-          {/* <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2 mt-2">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" name="username" placeholder="John Doe" required />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" name="email" type="email" placeholder="m@example.com" required />
             </div>
-          </div>
-          <Button variant="outline" className="w-full" type="button">
-            <Github className="mr-2 h-4 w-4" />
-            GitHub
-          </Button> */}
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" name="password" type="password" required />
+            </div>
+            <Button className="w-full" type="submit">
+              Create account
+            </Button>
+          </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <div className="text-sm text-muted-foreground mt-2">
@@ -50,7 +62,7 @@ export default function SignUp() {
             </Link>
           </div>
         </CardFooter>
-      </Card>   
+      </Card>
     </div>
   )
 }

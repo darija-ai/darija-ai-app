@@ -4,38 +4,25 @@ import { Button } from "@/shared/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Input } from "@/shared/components/ui/input"
 import { Label } from "@/shared/components/ui/label"
-import { useState } from 'react';
-import apiRequest from '../../lib/apiRequest';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useState } from "react"
+import { signIn } from "../../api/authApi"
 
 export default function SignIn() {
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { updateUser } = useContext(AuthContext);
-
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    const formData = new FormData(e.target);
-    const username = formData.get('username');
-    const password = formData.get('password');
+    setIsLoading(true)
+    setError('')
 
     try {
-      const res = await apiRequest.post('/auth/login', {
-        username,
-        password,
-      });
-      console.log(res.data)
-      updateUser(res.data);
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      await signIn(email, password);
+    } catch (err) {
+      setError('Failed to sign up')
     } finally {
       setIsLoading(false);
     }
@@ -49,34 +36,24 @@ export default function SignIn() {
           <CardDescription>Enter your email and password to sign in to your account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2 mt-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" required />
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
-              <Link to="/forgot-password" className="text-sm text-primary hover:underline">
-                Forgot password?
-              </Link>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2 mt-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" name="email" placeholder="m@example.com" required />
             </div>
-            <Input id="password" type="password" required onClick={handleSubmit}/>
-          </div>
-          <Button className="w-full" type="submit">
-            Sign in
-          </Button>
-          {/* <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                <Link to="/forgot-password" className="text-sm text-primary hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+              <Input id="password" name="password" required />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-            </div>
-          </div>
-          <Button variant="outline" className="w-full" type="button">
-            <Github className="mr-2 h-4 w-4" />
-            GitHub
-          </Button> */}
+            <Button className="w-full" type="submit">
+              Sign in
+            </Button>
+          </form>
         </CardContent>
         <CardFooter className="flex justify-center mt-2">
           <div className="text-sm text-muted-foreground">

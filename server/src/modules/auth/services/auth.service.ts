@@ -14,7 +14,7 @@ export interface SignupDto {
 }
 
 export interface LoginDto {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -78,10 +78,10 @@ class AuthService {
   }
 
   async login(data: LoginDto): Promise<{ user: any; token: string }> {
-    const { username, password } = data;
+    const { email, password } = data;
 
     const user = await this.prisma.user.findUnique({
-      where: { username },
+      where: { email },
     });
 
     if (!user) {
