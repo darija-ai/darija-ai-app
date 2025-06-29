@@ -1,60 +1,59 @@
 import { useNavigate } from "@tanstack/react-router";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 const LandingPage = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
-    <div className=" bg-orange-50 text-gray-900">
-      {/* Hero Section */}
-      <section className="relative pt-24 overflow-hidden">
-        <div className="absolute inset-0 z-0">
+    <div>
+      <section className="relative h-screen bg-black">
+        <div className="absolute inset-0 z-0 bg-black">
           <img
-            src="/herosection2.jpg"
+            src="/hero-bg3.png"
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute bg-black/40 inset-0"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
         </div>
-
-        <div className="container mx-auto px-4 py-16 flex flex-col items-center relative z-20 text-center">
-          <div className="w-full max-w-2xl text-orange-50 mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              The All in one 
-              <span className="block">Moroccan Arabic LLMs</span>
-            </h1>
-            <p className="text-lg md:text-xl mb-8 text-cream-100 mx-auto">
-              Experience the most accurate and contextually relevant English to
-              Arabic translations, using state-of-the-art AI language models
-              optimized for Arabic dialects.
-            </p>
-
+        <div className="absolute inset-0 flex flex-col items-center justify-center ">
+          <div className="w-full flex flex-col items-center justify-center max-w-5xl text-orange-50 text-center px-4 mt-12">
             <div className="flex flex-col items-center space-y-4 mb-8">
-              <button onClick={() => navigate({ to: '/sign-in' })} className="px-6 py-3 bg-cream-50 border-1 font-semibold rounded-lg hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer">
-                Start Now
+              <button
+                onClick={() => navigate({ to: "/sign-in" })}
+                className="bg-white/30 backdrop-blur-none rounded-full px-6 py-1 flex items-center gap-2"
+              >
+                make everlasting impact
+                <ArrowRight size={16} />
               </button>
             </div>
+            <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-6">
+              The All in one
+              <span className="block">Moroccan Arabic Annotator</span>
+            </h1>
+            <p className="text-xl md:text-xl mb-8 text-amber-150">
+              Experience the most accurate and contextually relevant <br />{" "}
+              English to Arabic translations, using state-of-the-art AI language
+              models
+              <br /> optimized for Arabic dialects.
+            </p>
 
-            <div className="flex items-center justify-center text-cream-100">
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+            <div className="flex space-x-2 pt-4">
+              <button
+                onClick={() => navigate({ to: "/sign-in" })}
+                className="bg-white/10 backdrop-blur-none text-white px-8 py-3 bg-cream-50 font-semibold rounded-full hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>No API key required. Try it instantly.</span>
+                Open App
+                <ExternalLink size={18} />
+              </button>
+              <button
+                onClick={() => navigate({ to: "/sign-in" })}
+                className="bg-white text-black px-6 py-3 bg-cream-50 border-1 font-semibold rounded-full hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Discover More
+              </button>
             </div>
           </div>
         </div>
-
-        {/* Abstract shapes for visual interest */}
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-burgundy-500/20 rounded-full filter blur-3xl z-10"></div>
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-cream-100/10 rounded-full filter blur-2xl z-10"></div>
       </section>
 
       {/* Services Section */}
@@ -92,7 +91,8 @@ const LandingPage = () => {
                 Model 1
               </h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <a
                 href="#"
@@ -136,8 +136,8 @@ const LandingPage = () => {
                 Model 2
               </h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <a
                 href="#"
@@ -181,7 +181,8 @@ const LandingPage = () => {
                 Model 3
               </h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <a
                 href="#"
@@ -213,7 +214,7 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center ">
             <div>
               <h3 className="text-4xl font-bold mb-2">99.8%</h3>
-              <p >Translation Accuracy</p>
+              <p>Translation Accuracy</p>
             </div>
             <div>
               <h3 className="text-4xl font-bold mb-2">10M+</h3>
@@ -242,7 +243,10 @@ const LandingPage = () => {
             No credit card required.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button onClick={() => navigate({ to: '/sign-in' })} className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors">
+            <button
+              onClick={() => navigate({ to: "/sign-in" })}
+              className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors"
+            >
               Start Free Trial
             </button>
           </div>
