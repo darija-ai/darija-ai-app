@@ -3,7 +3,7 @@ import PublicNavigation from '../shared/navigation/public-navigation';
 import PrivateNavigation from '../shared/navigation/private-navigation';
 
 const checkAuth = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return isAuthenticated;
 }
 
