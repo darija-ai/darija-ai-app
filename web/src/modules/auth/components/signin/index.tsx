@@ -33,8 +33,6 @@ export default function SignIn() {
       window.dispatchEvent(new Event('authChanged'));
       const searchParams = new URLSearchParams(window.location.search);
       const redirectTo = searchParams.get("redirect") || "/dashboard";
-
-      // Navigate to private route after successful login
       navigate({ to: redirectTo });
     } catch (err) {
       setError("Failed to sign in");
