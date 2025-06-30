@@ -30,17 +30,20 @@ export default function SignUp() {
       const username = formData.get("username") as string;
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
+
       await signUp(username, email, password);
-      window.dispatchEvent(new Event("authChanged"));
-      const searchParams = new URLSearchParams(window.location.search);
-      const redirectTo = searchParams.get("redirect") || "/dashboard";
-      navigate({ to: redirectTo });
+
+      navigate({
+        to: "/sign-in",
+        search: { message: "Account created successfully! Please sign in." }
+      });
     } catch (err) {
-      setError("Failed to sign up");
+      setError(err instanceof Error ? err.message : "Failed to sign up");
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-4 bg-orange-50">
       <Card className="w-full max-w-md">
@@ -77,8 +80,15 @@ export default function SignUp() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" name="password" type="password" required />
             </div>
-            <Button className="w-full" type="submit">
-              Create account
+
+            {error && (
+              <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md border border-red-200">
+                {error}
+              </div>
+            )}
+
+            <Button className="w-full" type="submit" disabled={isLoading}>
+              {isLoading ? "Creating account..." : "Create account"}
             </Button>
           </form>
         </CardContent>

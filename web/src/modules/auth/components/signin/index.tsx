@@ -35,7 +35,7 @@ export default function SignIn() {
       const redirectTo = searchParams.get("redirect") || "/dashboard";
       navigate({ to: redirectTo });
     } catch (err) {
-      setError("Failed to sign in");
+      setError(err instanceof Error ? err.message : "Failed to sign in");
     } finally {
       setIsLoading(false);
     }
@@ -73,8 +73,14 @@ export default function SignIn() {
               </div>
               <Input id="password" name="password" required />
             </div>
-            <Button className="w-full" type="submit">
-              Sign in
+            {error && (
+              <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md border border-red-200">
+                {error}
+              </div>
+            )}
+
+            <Button className="w-full" type="submit" disabled={isLoading}>
+              {isLoading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
         </CardContent>
