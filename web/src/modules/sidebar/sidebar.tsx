@@ -27,15 +27,21 @@ import {
   DropdownMenuItem,
 } from "@/shared/components/ui/dropdown-menu";
 
+import { useNavigate } from "@tanstack/react-router";
+
 const items = [
   { title: "Home", url: "#", icon: Home },
   { title: "Inbox", url: "#", icon: Inbox },
+  { title: "Annotator", url: "#", icon: Inbox },
   { title: "Calendar", url: "#", icon: Calendar },
   { title: "Search", url: "#", icon: Search },
   { title: "Settings", url: "#", icon: Settings },
 ];
 
 export function AppSidebar() {
+
+  const navigate = useNavigate()
+
   return (
     <Sidebar className="flex flex-col h-full">
       <SidebarContent className="flex-1">
@@ -46,7 +52,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <a
+                      href={item.url}
+                      onClick={() => navigate({ to: "/annotator" })}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </a>

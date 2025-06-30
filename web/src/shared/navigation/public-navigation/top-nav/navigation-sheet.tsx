@@ -1,17 +1,23 @@
-import { Button } from "@/shared/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/shared/components/ui/sheet"
-import { Menu } from "lucide-react"
-import { Link } from "@tanstack/react-router"
-import { Logo } from "./logo"
+import { Button } from "@/shared/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/shared/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Logo } from "./logo";
+import { useNavigate } from "@tanstack/react-router";
 
 const navigationItems = [
   { href: "#", label: "Home" },
   { href: "#", label: "Features" },
   { href: "#", label: "About" },
   { href: "#", label: "Contact" },
-]
+];
 
 export const NavigationSheet = () => {
+  const navigate = useNavigate();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -45,9 +51,11 @@ export const NavigationSheet = () => {
           >
             Login
           </Button>
-          <Button className="w-full rounded-full bg-white text-black hover:bg-amber-100">Sign Up</Button>
+          <Button className="w-full rounded-full bg-white text-black hover:bg-amber-100">
+            Sign Up
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
-  )
-}
+  );
+};
