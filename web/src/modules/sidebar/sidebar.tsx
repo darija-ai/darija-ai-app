@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
 import { jwtDecode } from 'jwt-decode';
+import { signOut } from '../auth/api/authApi';
 
 interface MenuItem {
   icon: LucideIcon;
@@ -57,13 +58,10 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
 
   const toggleExpanded = () => setIsExpanded(!isExpanded);
 
-  const handleLogout = () => {
-    localStorage.removeItem('auth-token');
-    localStorage.removeItem('user');
-    
+  const handleLogout = async () => {
+    await signOut();
     window.dispatchEvent(new Event('authChanged'));
-    
-    navigate({ to: '/sign-in' });
+    navigate({ to: '/' });
   };
 
   const menuItems: MenuItem[] = [
