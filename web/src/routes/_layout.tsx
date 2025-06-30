@@ -1,11 +1,12 @@
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
-import PublicNavigation from '../shared/navigation/public-navigation';
-import PrivateNavigation from '../shared/navigation/private-navigation';
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import PublicNavigation from "../shared/navigation/public-navigation";
+import PrivateNavigation from "../shared/navigation/private-navigation";
+import { useState, useEffect } from "react";
 
 const checkAuth = () => {
-  const isAuthenticated = true;
-  return isAuthenticated;
-}
+  const token = localStorage.getItem("auth-token");
+  return !!token;
+};
 
 const isProtectedRoute = (pathname: string) => {
   const protectedPaths = ['/dashboard', '/speech-to-text'];
@@ -13,29 +14,37 @@ const isProtectedRoute = (pathname: string) => {
 }
 
 const MyApp = () => {
-  const isAuthenticated = checkAuth();
-  return (
-    <>
-      {
-        !isAuthenticated ? <PublicLayout /> : <PrivateLayout />
-      }
-    </>
-  )
-}
+  const [isAuthenticated, setIsAuthenticated] = useState(checkAuth());
 
-export const Route = createFileRoute('/_layout')({
+    useEffect(() => {
+    const handleAuthChange = () => {
+      setIsAuthenticated(checkAuth());
+    };
+
+    window.addEventListener('authChanged', handleAuthChange);
+    window.addEventListener('storage', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('authChanged', handleAuthChange);
+      window.removeEventListener('storage', handleAuthChange);
+    };
+  }, []);
+  return <>{!isAuthenticated ? <PublicLayout /> : <PrivateLayout />}</>;
+};
+
+export const Route = createFileRoute("/_layout")({
   beforeLoad: async ({ location }) => {
     if (isProtectedRoute(location.pathname) && !checkAuth()) {
       throw redirect({
-        to: '/sign-in',
+        to: "/sign-in",
         search: {
           redirect: location.href,
         },
-      })
+      });
     }
   },
   component: MyApp,
-})
+});
 
 const PublicLayout = () => {
   return (
@@ -44,7 +53,7 @@ const PublicLayout = () => {
         <Outlet />
       </PublicNavigation>
     </>
-  )
+  );
 };
 
 const PrivateLayout = () => {
@@ -54,5 +63,5 @@ const PrivateLayout = () => {
         <Outlet />
       </PrivateNavigation>
     </>
-  )
+  );
 };
