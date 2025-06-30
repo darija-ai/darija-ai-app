@@ -7,37 +7,25 @@ import {
 import type { NavigationMenuProps } from "@radix-ui/react-navigation-menu"
 import { Link } from "@tanstack/react-router"
 
+const menuItems = [
+  { label: "Home", to: "/" },
+  { label: "Features", to: "/features" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+]
+
 export const NavMenu = (props: NavigationMenuProps) => (
   <NavigationMenu {...props}>
     <NavigationMenuList className="hidden md:flex gap-6 space-x-0 flex-row items-start">
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link to="#" className="text-white/90 hover:text-white transition-colors">
-            Home
-          </Link>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link to="#" className="text-white/90 hover:text-white transition-colors">
-            Features
-          </Link>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link to="#" className="text-white/90 hover:text-white transition-colors">
-            About
-          </Link>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link to="#" className="text-white/90 hover:text-white transition-colors">
-            Contact
-          </Link>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
+      {menuItems.map((item) => (
+        <NavigationMenuItem key={item.label}>
+          <NavigationMenuLink asChild>
+            <Link to={item.to} className="text-white/90 hover:text-white transition-colors">
+              {item.label}
+            </Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      ))}
     </NavigationMenuList>
   </NavigationMenu>
 )
