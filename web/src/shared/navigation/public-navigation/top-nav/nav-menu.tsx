@@ -7,7 +7,7 @@ import {
 import type { NavigationMenuProps } from "@radix-ui/react-navigation-menu"
 import { Link } from "@tanstack/react-router"
 
-const menuItems = [
+const navItems = [
   { label: "Home", to: "/" },
   { label: "Features", to: "/features" },
   { label: "About", to: "/about" },
@@ -17,7 +17,7 @@ const menuItems = [
 export const NavMenu = (props: NavigationMenuProps) => (
   <NavigationMenu {...props}>
     <NavigationMenuList className="hidden md:flex gap-6 space-x-0 flex-row items-start">
-      {menuItems.map((item) => (
+      {navItems.map((item) => (
         <NavigationMenuItem key={item.label}>
           <NavigationMenuLink asChild>
             <Link to={item.to} className="text-white/90 hover:text-white transition-colors">
