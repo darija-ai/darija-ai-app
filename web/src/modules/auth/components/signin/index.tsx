@@ -31,9 +31,7 @@ export default function SignIn() {
       const password = formData.get("password") as string;
       await signIn(email, password);
       window.dispatchEvent(new Event('authChanged'));
-      const searchParams = new URLSearchParams(window.location.search);
-      const redirectTo = searchParams.get("redirect") || "/dashboard";
-      navigate({ to: redirectTo });
+      navigate({ to: "/dashboard" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to sign in");
     } finally {

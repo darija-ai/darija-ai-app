@@ -1,9 +1,8 @@
 import { ReactNode } from "@tanstack/react-router";
 import {
   SidebarProvider,
-  SidebarTrigger,
 } from "../../components/ui/sidebar";
-import { AppSidebar } from "../../../modules/sidebar/sidebar";
+import  AppSidebar  from "../../../modules/sidebar/sidebar";
 import Cookies from "js-cookie";
 
 const PrivateNavigation = ({ children }: { children: ReactNode }) => {
@@ -12,7 +11,6 @@ const PrivateNavigation = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <SidebarTrigger />
       {children}
     </SidebarProvider>
   );

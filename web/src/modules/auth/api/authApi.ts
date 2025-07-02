@@ -58,16 +58,16 @@ export const signIn = async (email: string, password: string) => {
   return data;
 };
 
-// export const signOut = async () => {
-//   try {
-//     await fetch(`${baseApi}/auth/logout`, {
-//       method: "POST",
-//       credentials: "include",
-//     });
-//   } catch (error) {
-//     console.error("Logout error:", error);
-//   } finally {
-//     localStorage.removeItem("auth-token");
-//     localStorage.removeItem("user");
-//   }
-// };
+export const signOut = async () => {
+  try {
+    await fetch(`${baseApi}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("user");
+  }
+};
