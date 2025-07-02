@@ -74,34 +74,36 @@ class AuthController {
         }
     };
 
-    getCurrentUser = async (req: Request, res: Response): Promise<void> => {
+    getCurrentUser = async (req: Request, res: Response) => {
         try {
-            const userId = req.user?.userId;
-            console.log(userId)
-            if (!userId) {
-                res.status(401).json({ message: 'Not authenticated' });
-                return;
-            }
-
-            const userWithDetails = await prisma.user.findUnique({
+            const userId = (req as any).user.userId;
+            const user = await prisma.user.findUnique({
                 where: { userId },
-            });
-
-            if (!userWithDetails) {
-                res.status(404).json({ message: 'User not found' });
-                return;
-            }
-
-            // Return full user details
-            res.status(200).json({ user: userWithDetails });
+                select: {
+                    userId: true,
+                    username: true,
+                    email: true,
+                    isActive: true,
+                    role: true,
+                    minutes: true,
+                    words: true,
+                    createdAt: true,
+                }
+            })
+            res.status(200).json({
+                message: 'Getting current user succesfully',
+                success: true,
+                data: user
+            })
         } catch (error) {
             console.error(
                 `Get current user error: ${error instanceof Error ? error.message : 'Unknown error'
                 }`
             );
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ message: 'Internal server error during getting current user' })
         }
-    };
+    }
+
 }
 
 export default new AuthController();

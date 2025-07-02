@@ -1,10 +1,13 @@
 import { baseApi } from "@/const/baseApi";
 
+// const token = localStorage.getItem("auth-token")
+
 export const signUp = async (username: string, email: string, password: string) => {
   const response = await fetch(`${baseApi}/auth/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      // 'Authorization': `Bearer ${token}` later
     },
     body: JSON.stringify({
       username,
@@ -31,7 +34,7 @@ export const signIn = async (email: string, password: string) => {
   const response = await fetch(`${baseApi}/auth/login`, {
     method: "POST",
     headers: {
-      "Content-TYpe": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email,
@@ -49,12 +52,12 @@ export const signIn = async (email: string, password: string) => {
     }
     throw new Error(errorMessage);
   }
+
   const data = await response.json();
-
-  if (data.token) {
+  if (data.token && data.user) {
     localStorage.setItem("auth-token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
   }
-
   return data;
 };
 

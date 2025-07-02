@@ -9,7 +9,6 @@ import {
   LucideIcon
 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
-import { jwtDecode } from 'jwt-decode';
 import { signOut } from '../auth/api/authApi';
 
 interface MenuItem {
@@ -22,7 +21,7 @@ interface SidebarProps {
   className?: string;
 }
 
-interface JwtPayload {
+interface User {
   username?: string;
   email?: string;
   role?: string;
@@ -36,20 +35,13 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('auth-token');
-    
-    if (token) {
+    const userString = localStorage.getItem('user');
+    if (userString) {
       try {
-        const decoded = jwtDecode<JwtPayload>(token);
-        console.log('Decoded token:', decoded);
-        
-        const userName = decoded.username || 'User';
-        const userEmail = decoded.email || 'user@aui.ma';
-        const userRole = decoded.role || 'Annotator';
-        
-        setUsername(userName);
-        setEmail(userEmail);
-        setRole(userRole);
+        const parsedUser: User = JSON.parse(userString)
+        if (parsedUser.username) setUsername(parsedUser.username);
+        if (parsedUser.email) setEmail(parsedUser.email);
+        if (parsedUser.role) setRole(parsedUser.role);
       } catch (error) {
         console.error('Error decoding token:', error);
       }
@@ -94,9 +86,8 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
             <li key={index}>
               <a
                 href={item.href}
-                className={`flex items-center px-3 py-3 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200 ${
-                  !isExpanded ? 'justify-center' : 'justify-start'
-                }`}
+                className={`flex items-center px-3 py-3 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200 ${!isExpanded ? 'justify-center' : 'justify-start'
+                  }`}
                 title={!isExpanded ? item.label : ''}
                 onClick={(e) => {
                   e.preventDefault();
@@ -104,9 +95,8 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
                 }}
               >
                 <item.icon size={20} className="flex-shrink-0" />
-                <span className={`ml-3 truncate transition-all duration-300 overflow-hidden ${
-                  !isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'
-                }`}>
+                <span className={`ml-3 truncate transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'
+                  }`}>
                   {item.label}
                 </span>
               </a>
@@ -133,7 +123,7 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
                 </p>
               </div>
             </div>
-            
+
             <button
               onClick={handleLogout}
               className="p-2 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200 flex-shrink-0 ml-2"

@@ -131,7 +131,7 @@ class AuthService {
     };
 
     const options: SignOptions = {
-      expiresIn:'24h',
+      expiresIn:'24h', //ikram-learn
     };
 
     return jwt.sign(payload, JWT_SECRET as Secret, options);

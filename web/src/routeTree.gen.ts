@@ -13,7 +13,6 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
-import { Route as LayoutpublicServicesImport } from './routes/_layout/(public)/services'
 import { Route as LayoutprotectedSpeechToTextImport } from './routes/_layout/(protected)/speech-to-text'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
 import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
@@ -32,12 +31,6 @@ const LayoutRoute = LayoutImport.update({
 const LayoutpublicIndexRoute = LayoutpublicIndexImport.update({
   id: '/(public)/',
   path: '/',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutpublicServicesRoute = LayoutpublicServicesImport.update({
-  id: '/(public)/services',
-  path: '/services',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -109,13 +102,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutprotectedSpeechToTextImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/(public)/services': {
-      id: '/_layout/(public)/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof LayoutpublicServicesImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/(public)/': {
       id: '/_layout/(public)/'
       path: '/'
@@ -166,7 +152,6 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
   LayoutprotectedSpeechToTextRoute: typeof LayoutprotectedSpeechToTextRoute
-  LayoutpublicServicesRoute: typeof LayoutpublicServicesRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
   LayoutpublicAboutIndexRoute: typeof LayoutpublicAboutIndexRoute
   LayoutpublicContactIndexRoute: typeof LayoutpublicContactIndexRoute
@@ -178,7 +163,6 @@ interface LayoutRouteChildren {
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
   LayoutprotectedSpeechToTextRoute: LayoutprotectedSpeechToTextRoute,
-  LayoutpublicServicesRoute: LayoutpublicServicesRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
   LayoutpublicAboutIndexRoute: LayoutpublicAboutIndexRoute,
   LayoutpublicContactIndexRoute: LayoutpublicContactIndexRoute,
@@ -194,7 +178,6 @@ export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
-  '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
   '/about': typeof LayoutpublicAboutIndexRoute
   '/contact': typeof LayoutpublicContactIndexRoute
@@ -206,7 +189,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
-  '/services': typeof LayoutpublicServicesRoute
   '/': typeof LayoutpublicIndexRoute
   '/about': typeof LayoutpublicAboutIndexRoute
   '/contact': typeof LayoutpublicContactIndexRoute
@@ -220,7 +202,6 @@ export interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
   '/_layout/(protected)/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
-  '/_layout/(public)/services': typeof LayoutpublicServicesRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
   '/_layout/(public)/about/': typeof LayoutpublicAboutIndexRoute
   '/_layout/(public)/contact/': typeof LayoutpublicContactIndexRoute
@@ -235,7 +216,6 @@ export interface FileRouteTypes {
     | ''
     | '/dashboard'
     | '/speech-to-text'
-    | '/services'
     | '/'
     | '/about'
     | '/contact'
@@ -244,25 +224,19 @@ export interface FileRouteTypes {
     | '/sign-up'
   fileRoutesByTo: FileRoutesByTo
   to:
-    
     | '/dashboard'
     | '/speech-to-text'
-   
     | '/'
     | '/about'
     | '/contact'
-   
     | '/features'
-   
     | '/login'
-   
     | '/sign-up'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/(protected)/dashboard'
     | '/_layout/(protected)/speech-to-text'
-    | '/_layout/(public)/services'
     | '/_layout/(public)/'
     | '/_layout/(public)/about/'
     | '/_layout/(public)/contact/'
@@ -298,7 +272,6 @@ export const routeTree = rootRoute
       "children": [
         "/_layout/(protected)/dashboard",
         "/_layout/(protected)/speech-to-text",
-        "/_layout/(public)/services",
         "/_layout/(public)/",
         "/_layout/(public)/about/",
         "/_layout/(public)/contact/",
@@ -313,10 +286,6 @@ export const routeTree = rootRoute
     },
     "/_layout/(protected)/speech-to-text": {
       "filePath": "_layout/(protected)/speech-to-text.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/(public)/services": {
-      "filePath": "_layout/(public)/services.tsx",
       "parent": "/_layout"
     },
     "/_layout/(public)/": {
