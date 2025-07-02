@@ -1,6 +1,6 @@
-import { baseApi } from "@/const/baseApi";
-
 // const token = localStorage.getItem("auth-token")
+
+const baseApi = import.meta.env.VITE_API_URL;
 
 export const signUp = async (username: string, email: string, password: string) => {
   const response = await fetch(`${baseApi}/auth/signup`, {

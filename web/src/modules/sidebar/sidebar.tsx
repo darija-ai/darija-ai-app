@@ -6,7 +6,8 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
-  LucideIcon
+  LucideIcon,
+  User
 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
 import { signOut } from '../auth/api/authApi';
@@ -60,6 +61,7 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
     { icon: Home, label: 'Dashboard', href: '/dashboard' },
     { icon: FileText, label: 'Speech To Text', href: '/speech-to-text' },
     { icon: Settings, label: 'Settings', href: '#' },
+    { icon: User, label: 'Profile', href: '/profile' },
   ];
 
   return (

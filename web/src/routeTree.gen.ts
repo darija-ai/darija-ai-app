@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
 import { Route as LayoutprotectedSpeechToTextImport } from './routes/_layout/(protected)/speech-to-text'
+import { Route as LayoutprotectedProfileImport } from './routes/_layout/(protected)/profile'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
 import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
 import { Route as LayoutpublicLoginIndexImport } from './routes/_layout/(public)/login/index'
@@ -40,6 +41,12 @@ const LayoutprotectedSpeechToTextRoute =
     path: '/speech-to-text',
     getParentRoute: () => LayoutRoute,
   } as any)
+
+const LayoutprotectedProfileRoute = LayoutprotectedProfileImport.update({
+  id: '/(protected)/profile',
+  path: '/profile',
+  getParentRoute: () => LayoutRoute,
+} as any)
 
 const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   id: '/(protected)/dashboard',
@@ -93,6 +100,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof LayoutprotectedDashboardImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(protected)/profile': {
+      id: '/_layout/(protected)/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof LayoutprotectedProfileImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/(protected)/speech-to-text': {
@@ -151,6 +165,7 @@ declare module '@tanstack/react-router' {
 
 interface LayoutRouteChildren {
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
+  LayoutprotectedProfileRoute: typeof LayoutprotectedProfileRoute
   LayoutprotectedSpeechToTextRoute: typeof LayoutprotectedSpeechToTextRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
   LayoutpublicAboutIndexRoute: typeof LayoutpublicAboutIndexRoute
@@ -162,6 +177,7 @@ interface LayoutRouteChildren {
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
+  LayoutprotectedProfileRoute: LayoutprotectedProfileRoute,
   LayoutprotectedSpeechToTextRoute: LayoutprotectedSpeechToTextRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
   LayoutpublicAboutIndexRoute: LayoutpublicAboutIndexRoute,
@@ -177,6 +193,7 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/dashboard': typeof LayoutprotectedDashboardRoute
+  '/profile': typeof LayoutprotectedProfileRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/': typeof LayoutpublicIndexRoute
   '/about': typeof LayoutpublicAboutIndexRoute
@@ -188,6 +205,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/dashboard': typeof LayoutprotectedDashboardRoute
+  '/profile': typeof LayoutprotectedProfileRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/': typeof LayoutpublicIndexRoute
   '/about': typeof LayoutpublicAboutIndexRoute
@@ -201,6 +219,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
+  '/_layout/(protected)/profile': typeof LayoutprotectedProfileRoute
   '/_layout/(protected)/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
   '/_layout/(public)/about/': typeof LayoutpublicAboutIndexRoute
@@ -215,6 +234,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/dashboard'
+    | '/profile'
     | '/speech-to-text'
     | '/'
     | '/about'
@@ -225,6 +245,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
+    | '/profile'
     | '/speech-to-text'
     | '/'
     | '/about'
@@ -236,6 +257,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_layout'
     | '/_layout/(protected)/dashboard'
+    | '/_layout/(protected)/profile'
     | '/_layout/(protected)/speech-to-text'
     | '/_layout/(public)/'
     | '/_layout/(public)/about/'
@@ -271,6 +293,7 @@ export const routeTree = rootRoute
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/(protected)/dashboard",
+        "/_layout/(protected)/profile",
         "/_layout/(protected)/speech-to-text",
         "/_layout/(public)/",
         "/_layout/(public)/about/",
@@ -282,6 +305,10 @@ export const routeTree = rootRoute
     },
     "/_layout/(protected)/dashboard": {
       "filePath": "_layout/(protected)/dashboard.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(protected)/profile": {
+      "filePath": "_layout/(protected)/profile.tsx",
       "parent": "/_layout"
     },
     "/_layout/(protected)/speech-to-text": {
