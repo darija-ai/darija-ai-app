@@ -1,3 +1,4 @@
+import { Card } from "@/shared/components/ui/card";
 import { useNavigate } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
@@ -57,156 +58,51 @@ const LandingPage = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 md:py-24 bg-orange-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-burgundy-800 mb-4">
-              Our Services
-            </h2>
-            <p className="max-w-2xl mx-auto text-gray-600 text-lg">
-              Discover our comprehensive suite of Arabic language AI services
-              designed for businesses and individuals alike.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Service 1 */}
-            <div className="bg-cream-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-burgundy-100 rounded-lg flex items-center justify-center mb-6">
-                <svg
-                  className="w-8 h-8 text-burgundy-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Model 1
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <a
-                href="#"
-                className="inline-flex items-center text-burgundy-600 font-medium hover:text-burgundy-700"
-              >
-                Learn more
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
+      <section>
+            <div className="bg-white py-24">
+                <div className="mx-auto max-w-5xl px-6">
+                    <div>
+                        <h2 className="text-foreground text-4xl font-semibold">Effortless Task Management</h2>
+                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Automate your tasks and workflows by connecting your favorite tools like Notion, Todoist, and more. AI-powered scheduling helps you stay on track and adapt to changing priorities.</p>
+                    </div>
+                    <div className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-16 md:grid-cols-3">
+                        <div className="space-y-4">
+                            <Card
+                                className="aspect-video overflow-hidden px-6"
+                                variant="soft">
+                                <Card className="h-full translate-y-6" />
+                            </Card>
+                            <div className="sm:max-w-sm">
+                                <h3 className="text-foreground text-xl font-semibold">Marketing Campaigns</h3>
+                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <Card
+                                className="aspect-video overflow-hidden p-6"
+                                variant="soft">
+                                <Card className="h-full" />
+                            </Card>
+                            <div className="sm:max-w-sm">
+                                <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
+                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <Card
+                                className="aspect-video overflow-hidden"
+                                variant="soft">
+                                <Card className="translate-6 h-full" />
+                            </Card>
+                            <div className="sm:max-w-sm">
+                                <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
+                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            {/* Service 2 */}
-            <div className="bg-cream-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-burgundy-100 rounded-lg flex items-center justify-center mb-6">
-                <svg
-                  className="w-8 h-8 text-burgundy-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Model 2
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <a
-                href="#"
-                className="inline-flex items-center text-burgundy-600 font-medium hover:text-burgundy-700"
-              >
-                Learn more
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-            </div>
-
-            {/* Service 3 */}
-            <div className="bg-cream-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-14 h-14 bg-burgundy-100 rounded-lg flex items-center justify-center mb-6">
-                <svg
-                  className="w-8 h-8 text-burgundy-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 11a7 7 0 01-7 7m0 0a7.001 7.001 0 01-7-7m7 7v4m0-11V3m0 0a7 7 0 017 7m-7-7a7 7 0 00-7 7"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-burgundy-700 mb-3">
-                Model 3
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <a
-                href="#"
-                className="inline-flex items-center text-burgundy-600 font-medium hover:text-burgundy-700"
-              >
-                Learn more
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Statistics Section */}
       <section className="py-16 md:py-24 bg-orange-50 text-black">
