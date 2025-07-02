@@ -1,6 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { NavMenu } from "./nav-menu";
-import { NavigationSheet } from "./navigation-sheet";
+import { NavigationSheet } from "./nav-sheet";
 import { useNavigate } from "@tanstack/react-router";
 
 export const Navbar = () => {
@@ -24,7 +24,7 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             className="hidden sm:inline-flex rounded-full bg-transparent text-white  border-white/20 hover:bg-white/10 hover:text-white"
-            onClick={() => navigate({ to: "/sign-in" })}
+            onClick={() => navigate({ to: "/login" })}
           >
             Login
           </Button>
