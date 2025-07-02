@@ -20,7 +20,7 @@ const LandingPage = () => {
           <div className="w-full flex flex-col items-center justify-center max-w-5xl text-orange-50 text-center px-4 mt-12">
             <div className="flex flex-col items-center space-y-4 mb-8">
               <button
-                onClick={() => navigate({ to: "/sign-in" })}
+                onClick={() => navigate({ to: "/login" })}
                 className="bg-white/30 backdrop-blur-none rounded-full px-6 py-1 flex items-center gap-2"
               >
                 make everlasting impact
@@ -59,50 +59,50 @@ const LandingPage = () => {
 
       {/* Services Section */}
       <section>
-            <div className="bg-white py-24">
-                <div className="mx-auto max-w-5xl px-6">
-                    <div>
-                        <h2 className="text-foreground text-4xl font-semibold">Effortless Task Management</h2>
-                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Automate your tasks and workflows by connecting your favorite tools like Notion, Todoist, and more. AI-powered scheduling helps you stay on track and adapt to changing priorities.</p>
-                    </div>
-                    <div className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-16 md:grid-cols-3">
-                        <div className="space-y-4">
-                            <Card
-                                className="aspect-video overflow-hidden px-6"
-                                variant="soft">
-                                <Card className="h-full translate-y-6" />
-                            </Card>
-                            <div className="sm:max-w-sm">
-                                <h3 className="text-foreground text-xl font-semibold">Marketing Campaigns</h3>
-                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <Card
-                                className="aspect-video overflow-hidden p-6"
-                                variant="soft">
-                                <Card className="h-full" />
-                            </Card>
-                            <div className="sm:max-w-sm">
-                                <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
-                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <Card
-                                className="aspect-video overflow-hidden"
-                                variant="soft">
-                                <Card className="translate-6 h-full" />
-                            </Card>
-                            <div className="sm:max-w-sm">
-                                <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
-                                <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div className="bg-white py-24">
+          <div className="mx-auto max-w-5xl px-6">
+            <div>
+              <h2 className="text-foreground text-4xl font-semibold">Effortless Task Management</h2>
+              <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Automate your tasks and workflows by connecting your favorite tools like Notion, Todoist, and more. AI-powered scheduling helps you stay on track and adapt to changing priorities.</p>
             </div>
-        </section>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-16 md:grid-cols-3">
+              <div className="space-y-4">
+                <Card
+                  className="aspect-video overflow-hidden px-6"
+                >
+                  <Card className="h-full translate-y-6" />
+                </Card>
+                <div className="sm:max-w-sm">
+                  <h3 className="text-foreground text-xl font-semibold">Marketing Campaigns</h3>
+                  <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <Card
+                  className="aspect-video overflow-hidden p-6"
+                >
+                  <Card className="h-full" />
+                </Card>
+                <div className="sm:max-w-sm">
+                  <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
+                  <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <Card
+                  className="aspect-video overflow-hidden"
+                >
+                  <Card className="translate-6 h-full" />
+                </Card>
+                <div className="sm:max-w-sm">
+                  <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
+                  <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Statistics Section */}
       <section className="py-16 md:py-24 bg-orange-50 text-black">
