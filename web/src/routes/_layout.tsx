@@ -9,9 +9,9 @@ const checkAuth = () => {
 };
 
 const isProtectedRoute = (pathname: string) => {
-  const protectedPaths = ['/dashboard', '/speech-to-text'];
-  return protectedPaths.some(path => pathname.startsWith(path));
-}
+  const protectedPaths = ["/dashboard", "/annotator"];
+  return protectedPaths.some((path) => pathname.startsWith(path));
+};
 
 const MyApp = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(checkAuth());
