@@ -2,7 +2,7 @@ import { ReactNode } from "@tanstack/react-router";
 import {
   SidebarProvider,
 } from "../../components/ui/sidebar";
-import  AppSidebar  from "../../../modules/sidebar/sidebar";
+import  AppSidebar  from "../../sidebar/sidebar";
 import Cookies from "js-cookie";
 
 const PrivateNavigation = ({ children }: { children: ReactNode }) => {

@@ -10,7 +10,7 @@ import {
   User
 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
-import { signOut } from '../auth/api/authApi';
+import { signOut } from '../../modules/auth/api/authApi';
 
 interface MenuItem {
   icon: LucideIcon;
