@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ANNOTATOR
+  SUPERVISOR
+  ADMIN
+}
+
+enum AnnotationType {
+  SPEECH_TO_TEXT
+  ENGLISH_TO_ARABIC
+  ARABIC_TO_DARIJA
+}
+
+enum AnnotationStatus {
+  PENDING
+  ANNOTATED
+  CONFIRMED
+  REJECTED
+}
+
+enum Language {
+  ENGLISH
+  ARABIC
+  DARIJA
+}
+
+model User {
+  userId            String       @id @default(uuid())
+  username          String       @unique
+  passwordHash      String
+  email             String?      @unique
+  isActive          Boolean      @default(true)
+  role              UserRole     @default(ANNOTATOR)
+  minutes           Float        @default(0)
+  words             Int          @default(0)
+  createdAt         DateTime     @default(now())
+  annotations       Annotation[] @relation("annotatedBy")
+  postedAnnotations Annotation[] @relation("postedBy")
+
+  @@map("user")
+}
+
+model Annotation {
+  id             String           @id @default(uuid())
+  originalText   String?
+  outputText     String
+  annotatedText  String?
+  posterId       String
+  postedBy       User             @relation("postedBy", fields: [posterId], references: [userId], onDelete: Cascade)
+  annotatorId    String
+  annotatedBy    User             @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
+  annotationType AnnotationType
+  status         AnnotationStatus @default(PENDING)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  SpeechToText SpeechToText[] @relation("speech")
+  TextToText   TextToText[]   @relation("text")
+
+  @@map("annotation")
+}
+
+model SpeechToText {
+  id           String     @id @default(uuid())
+  audioUrl     String
+  annotationId String
+  annotation   Annotation @relation("speech", fields: [annotationId], references: [id], onDelete: Cascade)
+}
+
+model TextToText {
+  id                  String     @id @default(uuid())
+  text                String
+  annotationId        String
+  originalLanguage    Language
+  translationLanguage Language
+  annotation          Annotation @relation("text", fields: [annotationId], references: [id], onDelete: Cascade)
+}

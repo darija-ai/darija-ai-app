@@ -69,7 +69,7 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </div>
-              <Input id="password" name="password" required />
+              <Input id="password" name="password" type="password" required />
             </div>
             {error && (
               <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md border border-red-200">

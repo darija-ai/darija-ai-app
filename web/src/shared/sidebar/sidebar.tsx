@@ -118,10 +118,10 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
               </div>
               <div className="ml-3 min-w-0">
                 <p className="text-white text-sm font-medium truncate whitespace-nowrap">
-                  {username} ({role})
+                  {username}
                 </p>
                 <p className="text-gray-400 text-xs truncate whitespace-nowrap">
-                  {email}
+                  {role}
                 </p>
               </div>
             </div>

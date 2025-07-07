@@ -34,7 +34,7 @@ export default function SignUp() {
       await signUp(username, email, password);
 
       navigate({
-        to: "/sign-in",
+        to: "/login",
         search: { message: "Account created successfully! Please sign in." }
       });
     } catch (err) {
@@ -95,7 +95,7 @@ export default function SignUp() {
         <CardFooter className="flex justify-center">
           <div className="text-sm text-muted-foreground mt-2">
             Already have an account?{" "}
-            <Link to="/sign-in" className="text-primary hover:underline">
+            <Link to="/login" className="text-primary hover:underline">
               Sign in
             </Link>
           </div>
