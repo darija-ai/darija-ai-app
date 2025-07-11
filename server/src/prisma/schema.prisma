@@ -50,13 +50,12 @@ model User {
 
 model Annotation {
   id             String           @id @default(uuid())
-  originalText   String?
   outputText     String
   annotatedText  String?
   posterId       String
   postedBy       User             @relation("postedBy", fields: [posterId], references: [userId], onDelete: Cascade)
-  annotatorId    String
-  annotatedBy    User             @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
+  annotatorId    String?
+  annotatedBy    User?             @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
   annotationType AnnotationType
   status         AnnotationStatus @default(PENDING)
   createdAt      DateTime         @default(now())

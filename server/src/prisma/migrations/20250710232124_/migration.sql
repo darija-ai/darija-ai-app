@@ -28,11 +28,10 @@ CREATE TABLE "user" (
 -- CreateTable
 CREATE TABLE "annotation" (
     "id" TEXT NOT NULL,
-    "originalText" TEXT,
     "outputText" TEXT NOT NULL,
     "annotatedText" TEXT,
     "posterId" TEXT NOT NULL,
-    "annotatorId" TEXT NOT NULL,
+    "annotatorId" TEXT,
     "annotationType" "AnnotationType" NOT NULL,
     "status" "AnnotationStatus" NOT NULL DEFAULT 'PENDING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
