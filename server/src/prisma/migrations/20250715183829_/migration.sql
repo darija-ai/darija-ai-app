@@ -32,6 +32,7 @@ CREATE TABLE "annotation" (
     "annotatedText" TEXT,
     "posterId" TEXT NOT NULL,
     "annotatorId" TEXT,
+    "supervisorId" TEXT,
     "annotationType" "AnnotationType" NOT NULL,
     "status" "AnnotationStatus" NOT NULL DEFAULT 'PENDING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -71,6 +72,9 @@ ALTER TABLE "annotation" ADD CONSTRAINT "annotation_posterId_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "annotation" ADD CONSTRAINT "annotation_annotatorId_fkey" FOREIGN KEY ("annotatorId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "annotation" ADD CONSTRAINT "annotation_supervisorId_fkey" FOREIGN KEY ("supervisorId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SpeechToText" ADD CONSTRAINT "SpeechToText_annotationId_fkey" FOREIGN KEY ("annotationId") REFERENCES "annotation"("id") ON DELETE CASCADE ON UPDATE CASCADE;

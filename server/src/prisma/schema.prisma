@@ -33,17 +33,18 @@ enum Language {
 }
 
 model User {
-  userId            String       @id @default(uuid())
-  username          String       @unique
-  passwordHash      String
-  email             String?      @unique
-  isActive          Boolean      @default(true)
-  role              UserRole     @default(ANNOTATOR)
-  minutes           Float        @default(0)
-  words             Int          @default(0)
-  createdAt         DateTime     @default(now())
-  annotations       Annotation[] @relation("annotatedBy")
-  postedAnnotations Annotation[] @relation("postedBy")
+  userId                String       @id @default(uuid())
+  username              String       @unique
+  passwordHash          String
+  email                 String?      @unique
+  isActive              Boolean      @default(true)
+  role                  UserRole     @default(ANNOTATOR)
+  minutes               Float        @default(0)
+  words                 Int          @default(0)
+  createdAt             DateTime     @default(now())
+  annotations           Annotation[] @relation("annotatedBy")
+  postedAnnotations     Annotation[] @relation("postedBy")
+  supervisedAnnotations Annotation[] @relation("supervisedBy")
 
   @@map("user")
 }
@@ -55,7 +56,9 @@ model Annotation {
   posterId       String
   postedBy       User             @relation("postedBy", fields: [posterId], references: [userId], onDelete: Cascade)
   annotatorId    String?
-  annotatedBy    User?             @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
+  annotatedBy    User?            @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
+  supervisorId   String?
+  suprevisedBy   User?            @relation("supervisedBy", fields: [supervisorId], references: [userId], onDelete: Cascade)
   annotationType AnnotationType
   status         AnnotationStatus @default(PENDING)
   createdAt      DateTime         @default(now())

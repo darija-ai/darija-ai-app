@@ -3,7 +3,7 @@ import prisma from "../prisma/client"
 export const createAnnotation = async (annotationData: any, userId: string) => {
 
     if (annotationData.annotationType === 'SPEECH_TO_TEXT') {
-        return prisma.annotation.create({
+        return await prisma.annotation.create({
             data: {
                 outputText: annotationData.output,
                 posterId: userId,
@@ -20,7 +20,7 @@ export const createAnnotation = async (annotationData: any, userId: string) => {
         })
     }
     else if (annotationData.annotationType === 'ENGLISH_TO_ARABIC' || annotationData.annotationType === 'ARABIC_TO_DARIJA') {
-        return prisma.annotation.create({
+        return await prisma.annotation.create({
             data: {
                 outputText: annotationData.output,
                 posterId: userId,
@@ -38,4 +38,44 @@ export const createAnnotation = async (annotationData: any, userId: string) => {
             }
         })
     }
+}
+
+export const annotateAnnotation = async (userId: string, annotationId: string, text: string) => {
+
+    return await prisma.annotation.update({
+        where: { id: annotationId },
+        data: {
+            annotatedText: text,
+            annotatorId: userId,
+            status: 'ANNOTATED'
+        }
+    })
+}
+
+export const superviseAnnotation = async (userId: string, annotationId: string, text: string) => {
+
+    return await prisma.annotation.update({
+        where: { id: annotationId },
+        data: {
+            annotatedText: text,
+            supervisorId: userId,
+            status: 'CONFIRMED'
+        }
+    })
+}
+
+export const rejectAnnotation = async (userId: string, annotationId: string) => {
+    return await prisma.annotation.update({
+        where: { id: annotationId },
+        data: {
+            status: 'REJECTED',
+            supervisorId: userId,
+        }
+    })
+}
+
+export const deleteAnnotation = async (annotationId: string) => {
+    return await prisma.annotation.delete({
+        where: { id: annotationId }
+    })
 }
