@@ -1,0 +1,444 @@
+{
+  "info": {
+    "name": "Darija AI API",
+    "description": "Complete API collection for Darija AI annotation system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "darija-ai-api-collection",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    }
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\",\n  \"email\": \"test@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup"
+              ]
+            },
+            "description": "Register a new user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('authToken', response.token);",
+                  "    console.log('Token saved:', response.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login with email and password"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "Get current authenticated user details"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Logout current user"
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication related endpoints"
+    },
+    {
+      "name": "Annotations",
+      "item": [
+        {
+          "name": "Create Speech-to-Text Annotation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annotationType\": \"SPEECH_TO_TEXT\",\n  \"output\": \"This is the AI-generated transcription\",\n  \"url\": \"https://example.com/audio/sample.mp3\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation"
+              ]
+            },
+            "description": "Create a new speech-to-text annotation task"
+          },
+          "response": []
+        },
+        {
+          "name": "Create English-to-Arabic Annotation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annotationType\": \"ENGLISH_TO_ARABIC\",\n  \"output\": \"هذا هو النص المترجم بواسطة الذكاء الاصطناعي\",\n  \"text\": \"This is the original English text to be translated\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation"
+              ]
+            },
+            "description": "Create a new English-to-Arabic translation annotation task"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Arabic-to-Darija Annotation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annotationType\": \"ARABIC_TO_DARIJA\",\n  \"output\": \"هاد هو النص بالدارجة المغربية\",\n  \"text\": \"هذا هو النص العربي الأصلي\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation"
+              ]
+            },
+            "description": "Create a new Arabic-to-Darija translation annotation task"
+          },
+          "response": []
+        },
+        {
+          "name": "Annotate Annotation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"This is the corrected/annotated text by the human annotator\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation/annotate/:annotationId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation",
+                "annotate",
+                ":annotationId"
+              ],
+              "variable": [
+                {
+                  "key": "annotationId",
+                  "value": "enter-annotation-id-here",
+                  "description": "The ID of the annotation to annotate"
+                }
+              ]
+            },
+            "description": "Submit human annotation for an existing annotation task"
+          },
+          "response": []
+        },
+        {
+          "name": "Supervise Annotation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"This is the final supervised and approved text\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation/supervise/:annotationId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation",
+                "supervise",
+                ":annotationId"
+              ],
+              "variable": [
+                {
+                  "key": "annotationId",
+                  "value": "enter-annotation-id-here",
+                  "description": "The ID of the annotation to supervise"
+                }
+              ]
+            },
+            "description": "Supervisor approves and potentially modifies an annotation"
+          },
+          "response": []
+        },
+        {
+          "name": "Reject Annotation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation/reject/:annotationId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation",
+                "reject",
+                ":annotationId"
+              ],
+              "variable": [
+                {
+                  "key": "annotationId",
+                  "value": "enter-annotation-id-here",
+                  "description": "The ID of the annotation to reject"
+                }
+              ]
+            },
+            "description": "Supervisor rejects an annotation"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Annotation",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/annotation/:annotationId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "annotation",
+                ":annotationId"
+              ],
+              "variable": [
+                {
+                  "key": "annotationId",
+                  "value": "enter-annotation-id-here",
+                  "description": "The ID of the annotation to delete"
+                }
+              ]
+            },
+            "description": "Delete an annotation permanently"
+          },
+          "response": []
+        }
+      ],
+      "description": "Annotation management endpoints"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
