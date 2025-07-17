@@ -33,14 +33,19 @@ Initialize and push the database schema:
 npx prisma db push
 ```
 
-Generate Prisma client:
+Reset database migrations:
 ```bash
-npx prisma generate
+npx prisma migrate reset
 ```
 
-Run database migrations (if needed):
+Run database migrations:
 ```bash
 npx prisma migrate dev
+```
+
+Generate Prisma client (done automatically when you migrate):
+```bash
+npx prisma generate
 ```
 
 ### 4. Start Development Server
