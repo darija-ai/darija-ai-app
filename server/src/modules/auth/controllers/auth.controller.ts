@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import prisma from '../prisma/client';
 import authService from '../services/auth.service';
 
 class AuthController {
@@ -73,37 +72,6 @@ class AuthController {
             res.status(500).json({ message: 'Internal server error during logout' });
         }
     };
-
-    getCurrentUser = async (req: Request, res: Response) => {
-        try {
-            const userId = (req as any).user.userId;
-            const user = await prisma.user.findUnique({
-                where: { userId },
-                select: {
-                    userId: true,
-                    username: true,
-                    email: true,
-                    isActive: true,
-                    role: true,
-                    minutes: true,
-                    words: true,
-                    createdAt: true,
-                }
-            })
-            res.status(200).json({
-                message: 'Getting current user succesfully',
-                success: true,
-                data: user
-            })
-        } catch (error) {
-            console.error(
-                `Get current user error: ${error instanceof Error ? error.message : 'Unknown error'
-                }`
-            );
-            res.status(500).json({ message: 'Internal server error during getting current user' })
-        }
-    }
-
 }
 
 export default new AuthController();

@@ -1,4 +1,4 @@
-import prisma from "../prisma/client"
+import prisma from "../../../shared/prisma/client"
 
 export const createAnnotation = async (annotationData: any, userId: string) => {
 
