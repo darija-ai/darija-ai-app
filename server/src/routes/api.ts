@@ -1,10 +1,12 @@
 import { Router } from 'express';
-import authRouter from './auth.routes';
-import annotationRouter from './annotation.router';
+import { authRoutes } from '../modules/auth';
+import { usersRoutes } from '../modules/users';
+import { annotationRoutes } from '../modules/annotations';
 
 const apiRouter = Router();
 
-apiRouter.use('/auth', authRouter);
-apiRouter.use('/annotation', annotationRouter);
+apiRouter.use('/auth', authRoutes);
+apiRouter.use('/users', usersRoutes);
+apiRouter.use('/annotation', annotationRoutes);
 
 export default apiRouter;

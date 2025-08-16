@@ -1,8 +1,9 @@
-import { PrismaClient, User, UserRole } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { Secret } from 'jsonwebtoken';
-import { PasswordUtils } from '../utils/passwordUtils';
+import { PasswordUtils } from '../../../shared/utils/passwordUtils';
+import prisma from '../../../shared/prisma/client';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
@@ -19,16 +20,10 @@ export interface LoginDto {
 }
 
 class AuthService {
-  private prisma: PrismaClient;
-
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
-
   async signup(data: SignupDto): Promise<{ user: any; token: string }> {
     const { username, password, email } = data;
 
-    const existingUsername = await this.prisma.user.findUnique({
+    const existingUsername = await prisma.user.findUnique({
       where: { username },
     });
 
@@ -37,7 +32,7 @@ class AuthService {
     }
 
     if (email) {
-      const existingEmail = await this.prisma.user.findUnique({
+      const existingEmail = await prisma.user.findUnique({
         where: { email },
       });
 
@@ -48,10 +43,10 @@ class AuthService {
 
     const passwordHash = await PasswordUtils.hashPassword(password);
 
-    const role = email === ADMIN_EMAIL ? UserRole.ADMIN : UserRole.ANNOTATOR;
+    const role = email === ADMIN_EMAIL ? 'ADMIN' : 'ANNOTATOR';
 
-    const result = await this.prisma.$transaction(async prisma => {
-      const user = await prisma.user.create({
+    const result = await prisma.$transaction(async (prismaClient: any) => {
+      const user = await prismaClient.user.create({
         data: {
           userId: uuidv4(),
           username,
@@ -80,7 +75,7 @@ class AuthService {
   async login(data: LoginDto): Promise<{ user: any; token: string }> {
     const { email, password } = data;
 
-    const user = await this.prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
     });
 
@@ -122,7 +117,7 @@ class AuthService {
     }
   }
 
-  private generateToken(user: User): string {
+  private generateToken(user: any): string {
     const payload = {
       userId: user.userId,
       username: user.username,
@@ -131,7 +126,7 @@ class AuthService {
     };
 
     const options: SignOptions = {
-      expiresIn:'24h', //ikram-learn
+      expiresIn: '24h',
     };
 
     return jwt.sign(payload, JWT_SECRET as Secret, options);
