@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const annotation_controller_1 = require("../controllers/annotation.controller");
+const annotationRouter = (0, express_1.Router)();
+annotationRouter.post('/', auth_middleware_1.requireAuth, annotation_controller_1.createAnnotationController);
+annotationRouter.put('/annotate/:id', auth_middleware_1.requireAuth, annotation_controller_1.annotateAnnotationController);
+annotationRouter.put('/supervise/:id', auth_middleware_1.requireAuth, annotation_controller_1.superviseAnnotationController);
+annotationRouter.put('/reject/:id', auth_middleware_1.requireAuth, annotation_controller_1.rejectAnnotationController);
+annotationRouter.delete('/:id', auth_middleware_1.requireAuth, annotation_controller_1.deleteAnnotationController);
+exports.default = annotationRouter;
