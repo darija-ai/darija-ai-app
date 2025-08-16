@@ -36,7 +36,7 @@ export const Route = createFileRoute("/_layout")({
   beforeLoad: async ({ location }) => {
     if (isProtectedRoute(location.pathname) && !checkAuth()) {
       throw redirect({
-        to: "/sign-in",
+        to: "/login",
         search: {
           redirect: location.href,
         },

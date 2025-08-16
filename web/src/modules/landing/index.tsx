@@ -32,22 +32,20 @@ const LandingPage = () => {
               <span className="block">Moroccan Arabic Annotator</span>
             </h1>
             <p className="text-xl md:text-xl mb-8 text-amber-150">
-              Experience the most accurate and contextually relevant <br />{" "}
-              English to Arabic translations, using state-of-the-art AI language
-              models
-              <br /> optimized for Arabic dialects.
+              Contribute to the training of moroccan arabic models <br />{" "}
+              Make speech-to-text, and text-to-speech models enterprise level
             </p>
 
             <div className="flex space-x-2 pt-4">
               <button
-                onClick={() => navigate({ to: "/sign-in" })}
+                onClick={() => navigate({ to: "/login" })}
                 className="bg-white/10 backdrop-blur-none text-white px-8 py-3 bg-cream-50 font-semibold rounded-full hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
               >
                 Open App
                 <ExternalLink size={18} />
               </button>
               <button
-                onClick={() => navigate({ to: "/sign-in" })}
+                onClick={() => navigate({ to: "/login" })}
                 className="bg-white text-black px-6 py-3 bg-cream-50 border-1 font-semibold rounded-full hover:bg-orange-50 hover:text-black transition-colors whitespace-nowrap cursor-pointer"
               >
                 Discover More
@@ -140,7 +138,7 @@ const LandingPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <button
-              onClick={() => navigate({ to: "/sign-in" })}
+              onClick={() => navigate({ to: "/login" })}
               className="px-8 py-3 bg-black text-orange-50 font-semibold rounded-lg hover:bg-teal-800 transition-colors"
             >
               Start Free Trial
