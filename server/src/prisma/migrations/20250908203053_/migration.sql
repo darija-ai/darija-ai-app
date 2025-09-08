@@ -2,7 +2,7 @@
 CREATE TYPE "UserRole" AS ENUM ('ANNOTATOR', 'SUPERVISOR', 'ADMIN');
 
 -- CreateEnum
-CREATE TYPE "AnnotationType" AS ENUM ('SPEECH_TO_TEXT', 'ENGLISH_TO_ARABIC', 'ARABIC_TO_DARIJA');
+CREATE TYPE "AnnotationType" AS ENUM ('SPEECH_TO_TEXT', 'TEXT_TO_TEXT');
 
 -- CreateEnum
 CREATE TYPE "AnnotationStatus" AS ENUM ('PENDING', 'ANNOTATED', 'CONFIRMED', 'REJECTED');
@@ -55,8 +55,8 @@ CREATE TABLE "TextToText" (
     "id" TEXT NOT NULL,
     "text" TEXT NOT NULL,
     "annotationId" TEXT NOT NULL,
-    "originalLanguage" "Language" NOT NULL,
-    "translationLanguage" "Language" NOT NULL,
+    "inputLanguage" "Language" NOT NULL,
+    "outputLanguage" "Language" NOT NULL,
 
     CONSTRAINT "TextToText_pkey" PRIMARY KEY ("id")
 );
