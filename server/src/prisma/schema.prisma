@@ -15,8 +15,7 @@ enum UserRole {
 
 enum AnnotationType {
   SPEECH_TO_TEXT
-  ENGLISH_TO_ARABIC
-  ARABIC_TO_DARIJA
+  TEXT_TO_TEXT
 }
 
 enum AnnotationStatus {
@@ -78,10 +77,10 @@ model SpeechToText {
 }
 
 model TextToText {
-  id                  String     @id @default(uuid())
-  text                String
-  annotationId        String
-  originalLanguage    Language
-  translationLanguage Language
-  annotation          Annotation @relation("text", fields: [annotationId], references: [id], onDelete: Cascade)
+  id             String     @id @default(uuid())
+  text           String
+  annotationId   String
+  inputLanguage  Language
+  outputLanguage Language
+  annotation     Annotation @relation("text", fields: [annotationId], references: [id], onDelete: Cascade)
 }
