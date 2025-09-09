@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:17
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+    networks:
+      - app-network
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=3000
+    
+    networks:
+      - app-network
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports: 
+      - "3001:3001"
+      - "5555:5555"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=3001
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  app-db-data:
+networks:
+  app-network:
+    driver: bridge
