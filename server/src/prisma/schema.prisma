@@ -58,7 +58,7 @@ model Annotation {
   annotatorId    String?
   annotatedBy    User?            @relation("annotatedBy", fields: [annotatorId], references: [userId], onDelete: Cascade)
   supervisorId   String?
-  suprevisedBy   User?            @relation("supervisedBy", fields: [supervisorId], references: [userId], onDelete: Cascade)
+  supervisedBy   User?            @relation("supervisedBy", fields: [supervisorId], references: [userId], onDelete: Cascade)
   annotationType AnnotationType
   status         AnnotationStatus @default(PENDING)
   createdAt      DateTime         @default(now())
