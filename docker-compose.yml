@@ -28,6 +28,8 @@ services:
     volumes:
       - ./web:/app
       - /app/node_modules
+    env_file:
+      - .env
     environment:
       - NODE_ENV=development
       - HOST=0.0.0.0
@@ -42,12 +44,21 @@ services:
     ports: 
       - "3001:3001"
       - "5555:5555"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
     env_file:
       - .env
     environment:
       - NODE_ENV=development
       - HOST=0.0.0.0
       - PORT=3001
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     depends_on:
       - db
     networks:

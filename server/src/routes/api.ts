@@ -8,7 +8,3 @@ apiRouter.use('/auth', authRouter);
 apiRouter.use('/annotation', annotationRouter);
 
 export default apiRouter;
-
-apiRouter.get("/test", (req, res) => {
-    res.send("this endpoint works")
-})
