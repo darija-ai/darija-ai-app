@@ -11,7 +11,7 @@ import {
 } from "@/shared/components/ui/card";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
-import useAuth from "../../hooks";
+import useAuth from "../hooks";
 
 export default function SignUp() {
   const { signUpMutation } = useAuth();

@@ -2,7 +2,7 @@ import { ReactNode } from "@tanstack/react-router"
 import Footer from "./footer"
 import {Navbar} from "./top-nav/navbar"
 
-const PublicNavigation = ({ children }: { children: ReactNode }) => {
+const PublicLayout = ({ children }: { children: ReactNode }) => {
     return (
         <>
             <Navbar/>
@@ -12,4 +12,4 @@ const PublicNavigation = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export default PublicNavigation
+export default PublicLayout;
