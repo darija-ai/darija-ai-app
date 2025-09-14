@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import prisma from '../prisma/client';
-import authService from '../services/auth.service';
+import prisma from '../../prisma/client';
+import authService from '../logic/auth.service';
 
 class AuthController {
     signup = async (req: Request, res: Response): Promise<void> => {

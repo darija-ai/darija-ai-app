@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import authRouter from './auth.routes';
-import annotationRouter from './annotation.router';
+import authRouter from './auth/routing/auth.routes';
+import annotationRouter from './annotation/routing/annotation.router';
 
 const apiRouter = Router();
 

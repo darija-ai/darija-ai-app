@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { requireAuth } from "../middlewares/auth.middleware";
-import { annotateAnnotationController, createAnnotationController, deleteAnnotationController, rejectAnnotationController, superviseAnnotationController } from '../controllers/annotation.controller';
+import { requireAuth } from "../../auth/middlewares/auth.middleware";
+import { annotateAnnotationController, createAnnotationController, deleteAnnotationController, rejectAnnotationController, superviseAnnotationController } from './annotation.controller';
 
 const annotationRouter = Router();
 

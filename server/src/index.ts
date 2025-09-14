@@ -4,12 +4,12 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import chalk from 'chalk';
-import apiRouter from './routes/api';
+import apiRouter from './api';
 
 dotenv.config();
 
 const config = {
-  port: parseInt(process.env.PORT || '899', 10),
+  port: parseInt(process.env.PORT || '3001', 10),
   frontendUrl: process.env.FRONTEND_URL || process.env.CLIENT_URL || "http://localhost:3000",
   nodeEnv: process.env.NODE_ENV || 'development',
 };

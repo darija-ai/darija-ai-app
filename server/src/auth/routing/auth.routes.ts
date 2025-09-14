@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import authController from '../controllers/auth.controller';
+import authController from './auth.controller';
 import { SignupSchema, LoginSchema } from '../schemas/auth.schema';
 import { requireAuth } from '../middlewares/auth.middleware';
 

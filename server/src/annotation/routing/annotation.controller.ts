@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { annotateAnnotation, createAnnotation, deleteAnnotation, rejectAnnotation, superviseAnnotation } from "../services/annotation.service";
+import { annotateAnnotation, createAnnotation, deleteAnnotation, rejectAnnotation, superviseAnnotation } from "../logic/annotation.service";
 
 export const createAnnotationController = async (req: any, res: Response): Promise<any> => {
     try {
