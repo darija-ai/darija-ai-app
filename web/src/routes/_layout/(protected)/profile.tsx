@@ -1,4 +1,4 @@
-import Profile from '@/modules/profile/components'
+import Profile from '@/features/profile/components'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_layout/(protected)/profile')({
