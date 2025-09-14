@@ -10,8 +10,8 @@ dotenv.config();
 
 const config = {
   port: parseInt(process.env.PORT || '899', 10),
-  frontendUrl: process.env.FRONTEND_URL,
-  nodeEnv: process.env.NODE_ENV || 'development1',
+  frontendUrl: process.env.FRONTEND_URL || process.env.CLIENT_URL || "http://localhost:3000",
+  nodeEnv: process.env.NODE_ENV || 'development',
 };
 
 const app = express();
@@ -19,7 +19,7 @@ const server = http.createServer(app);
 
 app.use(
   cors({
-    origin: config.frontendUrl,
+    origin: true,
     credentials: true,
   })
 );

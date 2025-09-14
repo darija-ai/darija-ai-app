@@ -11,37 +11,24 @@ import {
 } from "@/shared/components/ui/card";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
-import { useState } from "react";
-import { signUp } from "../../api/authApi";
-import { useNavigate } from "@tanstack/react-router";
+import useAuth from "../../hooks";
 
 export default function SignUp() {
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { signUpMutation } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
 
-    try {
-      const formData = new FormData(e.target as HTMLFormElement);
-      const username = formData.get("username") as string;
-      const email = formData.get("email") as string;
-      const password = formData.get("password") as string;
+    const formData = new FormData(e.target as HTMLFormElement);
+    const username = formData.get("username") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
-      await signUp(username, email, password);
-
-      navigate({
-        to: "/login",
-        search: { message: "Account created successfully! Please sign in." }
-      });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to sign up");
-    } finally {
-      setIsLoading(false);
-    }
+    signUpMutation.mutate({
+      username,
+      email,
+      password
+    });
   };
 
   return (
@@ -81,14 +68,14 @@ export default function SignUp() {
               <Input id="password" name="password" type="password" required />
             </div>
 
-            {error && (
+            {signUpMutation.error && (
               <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md border border-red-200">
-                {error}
+                {signUpMutation.error.message}
               </div>
             )}
 
-            <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? "Creating account..." : "Create account"}
+            <Button className="w-full" type="submit" disabled={signUpMutation.isPending}>
+              {signUpMutation.isPending ? "Creating account..." : "Create account"}
             </Button>
           </form>
         </CardContent>

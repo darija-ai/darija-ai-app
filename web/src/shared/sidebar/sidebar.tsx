@@ -10,7 +10,7 @@ import {
   User
 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
-import { signOut } from '../../modules/auth/api/authApi';
+import { signOut } from '../../features/auth/api/authApi';
 
 interface MenuItem {
   icon: LucideIcon;
@@ -52,7 +52,7 @@ const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
   const toggleExpanded = () => setIsExpanded(!isExpanded);
 
   const handleLogout = async () => {
-    await signOut();
+    // await signOut();
     window.dispatchEvent(new Event('authChanged'));
     navigate({ to: '/' });
   };

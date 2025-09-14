@@ -1,10 +1,10 @@
-import { ReactNode } from "react"
+import { PropsWithChildren } from "react"
 import LayoutProvider from "./layout-provider"
 
-const AppProviders = ({ children }: { children: ReactNode }) => {
+const AppProviders = (props: PropsWithChildren) => {
     return (
         <LayoutProvider>
-            {children}
+            {props.children}
         </LayoutProvider>
     )
 }
