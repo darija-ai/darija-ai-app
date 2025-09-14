@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import LandingPage from '../../../features/_landing/index'
-import PublicLayout from '@/shared/navigation/public-navigation';
+import PublicLayout from '@/shared/layouts/public';
 
 
 const RouteComponent = () => {

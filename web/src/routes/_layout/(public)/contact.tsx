@@ -13,7 +13,7 @@ import {
 } from "@/shared/components/ui/select";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/shared/components/ui/button";
-import PublicLayout from "@/shared/navigation/public-navigation";
+import PublicLayout from "@/shared/layouts/public";
 
 
 

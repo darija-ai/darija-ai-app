@@ -1,4 +1,4 @@
-import PrivateNavigation from '@/shared/navigation/private-navigation';
+import PrivateNavigation from '@/shared/layouts/private';
 import { createFileRoute } from '@tanstack/react-router'
 
 

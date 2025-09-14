@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import AnnotatorPage from '../../../features/speech-to-text'
-import PrivateNavigation from '@/shared/navigation/private-navigation';
+import PrivateNavigation from '@/shared/layouts/private';
+import { AnnotationInterface } from '@/features/annotation/annotation-interface';
 
 const RouteComponent = () => {
   return (
     <PrivateNavigation>
-      <AnnotatorPage />
+      <AnnotationInterface />
     </PrivateNavigation>
   );
 }

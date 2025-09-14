@@ -1,4 +1,4 @@
-import PublicLayout from "@/shared/navigation/public-navigation";
+import PublicLayout from "@/shared/layouts/public";
 import { createFileRoute } from "@tanstack/react-router";
 
 

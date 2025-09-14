@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import PublicLayout from '@/shared/navigation/public-navigation';
+import PublicLayout from '@/shared/layouts/public';
 import Login from '@/features/auth/components/login';
 
 
