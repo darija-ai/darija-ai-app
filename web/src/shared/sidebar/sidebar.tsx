@@ -6,18 +6,27 @@ const AppSidebar = ({ className = '' }) => {
 
   const menuItems = [
     { icon: Home, label: 'Dashboard', href: '/dashboard' },
-    { icon: FileText, label: 'Speech To Text', href: '/speech-to-text' },
+    { icon: FileText, label: 'Annotation Work', href: '/tasks' },
     { icon: Settings, label: 'Settings', href: '#' },
     { icon: User, label: 'Profile', href: '/profile' },
   ];
 
   return (
-    <nav className={`h-screen w-72 bg-slate-900 flex flex-col ${className}`}>
-      <div className="p-4 border-b border-orange-50">
-        <h2 className="text-white text-xl font-bold text-center">Darija AI</h2>
+    <nav className={`h-screen w-72 flex flex-col ${className}`}>
+      <div className="p-4 mt-4 px-3">
+        <div className="pl-3">
+          <div className="text-white ml-4">
+            <img
+              src="/logo.webp"
+              width={60}
+              className="invert hover:opacity-50"
+              onClick={() => navigate({ to: '/' })}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex-1 py-4 px-3">
+      <div className="flex-1 py-4 px-3 mt-10">
         {menuItems.map((item, index) => (
           <button
             key={index}

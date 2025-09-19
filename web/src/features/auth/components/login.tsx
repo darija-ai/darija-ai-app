@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, Navigate, redirect, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,
@@ -11,7 +11,11 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 
+
+
 export default function SignIn() {
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4 bg-orange-50">
@@ -46,7 +50,7 @@ export default function SignIn() {
               <Input id="password" name="password" type="password" required />
             </div>
 
-            <Button className="w-full" type="submit">
+            <Button className="w-full" type="submit" onClick={() => navigate({to: '/speech-to-text'})}>
               {false ? "Signing in..." : "Sign in"} {/* false shall be replaced with isLoading  */}
             </Button>
           </form>

@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '../../shared/components/ui/dialog';
 
 interface SkipDialogProps {
   isOpen: boolean;
@@ -10,8 +15,6 @@ interface SkipDialogProps {
 export function SkipDialog({ isOpen, onClose, onConfirm }: SkipDialogProps) {
   const [selectedReason, setSelectedReason] = useState('');
   const [customReason, setCustomReason] = useState('');
-
-  if (!isOpen) return null;
 
   const handleSubmit = () => {
     const reason = selectedReason === 'others' ? customReason : selectedReason;
@@ -31,17 +34,11 @@ export function SkipDialog({ isOpen, onClose, onConfirm }: SkipDialogProps) {
   const isValid = selectedReason === 'others' ? customReason.trim().length > 0 : selectedReason.length > 0;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-gray-900">Skip Annotation</h3>
-          <button
-            onClick={handleClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            <X size={24} />
-          </button>
-        </div>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>Skip Annotation</DialogTitle>
+        </DialogHeader>
 
         <p className="text-gray-600 mb-6">Please select a reason for skipping this annotation:</p>
 
@@ -96,7 +93,7 @@ export function SkipDialog({ isOpen, onClose, onConfirm }: SkipDialogProps) {
             Skip
           </button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

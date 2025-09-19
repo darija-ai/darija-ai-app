@@ -21,6 +21,8 @@ import { Route as LayoutpublicAboutImport } from './routes/_layout/(public)/abou
 import { Route as LayoutprotectedSpeechToTextImport } from './routes/_layout/(protected)/speech-to-text'
 import { Route as LayoutprotectedProfileImport } from './routes/_layout/(protected)/profile'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
+import { Route as LayoutprotectedTasksIndexImport } from './routes/_layout/(protected)/tasks/index'
+import { Route as LayoutprotectedTasksAnnotateImport } from './routes/_layout/(protected)/tasks/annotate'
 
 // Create/Update Routes
 
@@ -83,6 +85,19 @@ const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   path: '/dashboard',
   getParentRoute: () => LayoutRoute,
 } as any)
+
+const LayoutprotectedTasksIndexRoute = LayoutprotectedTasksIndexImport.update({
+  id: '/(protected)/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutprotectedTasksAnnotateRoute =
+  LayoutprotectedTasksAnnotateImport.update({
+    id: '/(protected)/tasks/annotate',
+    path: '/tasks/annotate',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -158,6 +173,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutpublicIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/(protected)/tasks/annotate': {
+      id: '/_layout/(protected)/tasks/annotate'
+      path: '/tasks/annotate'
+      fullPath: '/tasks/annotate'
+      preLoaderRoute: typeof LayoutprotectedTasksAnnotateImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(protected)/tasks/': {
+      id: '/_layout/(protected)/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof LayoutprotectedTasksIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
@@ -173,6 +202,8 @@ interface LayoutRouteChildren {
   LayoutpublicLoginRoute: typeof LayoutpublicLoginRoute
   LayoutpublicSignUpRoute: typeof LayoutpublicSignUpRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
+  LayoutprotectedTasksAnnotateRoute: typeof LayoutprotectedTasksAnnotateRoute
+  LayoutprotectedTasksIndexRoute: typeof LayoutprotectedTasksIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -185,6 +216,8 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutpublicLoginRoute: LayoutpublicLoginRoute,
   LayoutpublicSignUpRoute: LayoutpublicSignUpRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
+  LayoutprotectedTasksAnnotateRoute: LayoutprotectedTasksAnnotateRoute,
+  LayoutprotectedTasksIndexRoute: LayoutprotectedTasksIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -201,6 +234,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof LayoutpublicLoginRoute
   '/sign-up': typeof LayoutpublicSignUpRoute
   '/': typeof LayoutpublicIndexRoute
+  '/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/tasks': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -213,6 +248,8 @@ export interface FileRoutesByTo {
   '/login': typeof LayoutpublicLoginRoute
   '/sign-up': typeof LayoutpublicSignUpRoute
   '/': typeof LayoutpublicIndexRoute
+  '/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/tasks': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRoutesById {
@@ -227,6 +264,8 @@ export interface FileRoutesById {
   '/_layout/(public)/login': typeof LayoutpublicLoginRoute
   '/_layout/(public)/sign-up': typeof LayoutpublicSignUpRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
+  '/_layout/(protected)/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/_layout/(protected)/tasks/': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -242,6 +281,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/'
+    | '/tasks/annotate'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
@@ -253,6 +294,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/'
+    | '/tasks/annotate'
+    | '/tasks'
   id:
     | '__root__'
     | '/_layout'
@@ -265,6 +308,8 @@ export interface FileRouteTypes {
     | '/_layout/(public)/login'
     | '/_layout/(public)/sign-up'
     | '/_layout/(public)/'
+    | '/_layout/(protected)/tasks/annotate'
+    | '/_layout/(protected)/tasks/'
   fileRoutesById: FileRoutesById
 }
 
@@ -300,7 +345,9 @@ export const routeTree = rootRoute
         "/_layout/(public)/features",
         "/_layout/(public)/login",
         "/_layout/(public)/sign-up",
-        "/_layout/(public)/"
+        "/_layout/(public)/",
+        "/_layout/(protected)/tasks/annotate",
+        "/_layout/(protected)/tasks/"
       ]
     },
     "/_layout/(protected)/dashboard": {
@@ -337,6 +384,14 @@ export const routeTree = rootRoute
     },
     "/_layout/(public)/": {
       "filePath": "_layout/(public)/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(protected)/tasks/annotate": {
+      "filePath": "_layout/(protected)/tasks/annotate.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(protected)/tasks/": {
+      "filePath": "_layout/(protected)/tasks/index.tsx",
       "parent": "/_layout"
     }
   }
