@@ -13,14 +13,16 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutpublicIndexImport } from './routes/_layout/(public)/index'
+import { Route as LayoutpublicSignUpImport } from './routes/_layout/(public)/sign-up'
+import { Route as LayoutpublicLoginImport } from './routes/_layout/(public)/login'
+import { Route as LayoutpublicFeaturesImport } from './routes/_layout/(public)/features'
+import { Route as LayoutpublicContactImport } from './routes/_layout/(public)/contact'
+import { Route as LayoutpublicAboutImport } from './routes/_layout/(public)/about'
 import { Route as LayoutprotectedSpeechToTextImport } from './routes/_layout/(protected)/speech-to-text'
 import { Route as LayoutprotectedProfileImport } from './routes/_layout/(protected)/profile'
 import { Route as LayoutprotectedDashboardImport } from './routes/_layout/(protected)/dashboard'
-import { Route as LayoutpublicSignUpIndexImport } from './routes/_layout/(public)/sign-up/index'
-import { Route as LayoutpublicLoginIndexImport } from './routes/_layout/(public)/login/index'
-import { Route as LayoutpublicFeaturesIndexImport } from './routes/_layout/(public)/features/index'
-import { Route as LayoutpublicContactIndexImport } from './routes/_layout/(public)/contact/index'
-import { Route as LayoutpublicAboutIndexImport } from './routes/_layout/(public)/about/index'
+import { Route as LayoutprotectedTasksIndexImport } from './routes/_layout/(protected)/tasks/index'
+import { Route as LayoutprotectedTasksAnnotateImport } from './routes/_layout/(protected)/tasks/annotate'
 
 // Create/Update Routes
 
@@ -32,6 +34,36 @@ const LayoutRoute = LayoutImport.update({
 const LayoutpublicIndexRoute = LayoutpublicIndexImport.update({
   id: '/(public)/',
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicSignUpRoute = LayoutpublicSignUpImport.update({
+  id: '/(public)/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicLoginRoute = LayoutpublicLoginImport.update({
+  id: '/(public)/login',
+  path: '/login',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicFeaturesRoute = LayoutpublicFeaturesImport.update({
+  id: '/(public)/features',
+  path: '/features',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicContactRoute = LayoutpublicContactImport.update({
+  id: '/(public)/contact',
+  path: '/contact',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutpublicAboutRoute = LayoutpublicAboutImport.update({
+  id: '/(public)/about',
+  path: '/about',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -54,35 +86,18 @@ const LayoutprotectedDashboardRoute = LayoutprotectedDashboardImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutpublicSignUpIndexRoute = LayoutpublicSignUpIndexImport.update({
-  id: '/(public)/sign-up/',
-  path: '/sign-up/',
+const LayoutprotectedTasksIndexRoute = LayoutprotectedTasksIndexImport.update({
+  id: '/(protected)/tasks/',
+  path: '/tasks/',
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutpublicLoginIndexRoute = LayoutpublicLoginIndexImport.update({
-  id: '/(public)/login/',
-  path: '/login/',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutpublicFeaturesIndexRoute = LayoutpublicFeaturesIndexImport.update({
-  id: '/(public)/features/',
-  path: '/features/',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutpublicContactIndexRoute = LayoutpublicContactIndexImport.update({
-  id: '/(public)/contact/',
-  path: '/contact/',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutpublicAboutIndexRoute = LayoutpublicAboutIndexImport.update({
-  id: '/(public)/about/',
-  path: '/about/',
-  getParentRoute: () => LayoutRoute,
-} as any)
+const LayoutprotectedTasksAnnotateRoute =
+  LayoutprotectedTasksAnnotateImport.update({
+    id: '/(protected)/tasks/annotate',
+    path: '/tasks/annotate',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -116,6 +131,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutprotectedSpeechToTextImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/(public)/about': {
+      id: '/_layout/(public)/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof LayoutpublicAboutImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(public)/contact': {
+      id: '/_layout/(public)/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof LayoutpublicContactImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(public)/features': {
+      id: '/_layout/(public)/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof LayoutpublicFeaturesImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(public)/login': {
+      id: '/_layout/(public)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LayoutpublicLoginImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/(public)/sign-up': {
+      id: '/_layout/(public)/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof LayoutpublicSignUpImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/(public)/': {
       id: '/_layout/(public)/'
       path: '/'
@@ -123,39 +173,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutpublicIndexImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/(public)/about/': {
-      id: '/_layout/(public)/about/'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutpublicAboutIndexImport
+    '/_layout/(protected)/tasks/annotate': {
+      id: '/_layout/(protected)/tasks/annotate'
+      path: '/tasks/annotate'
+      fullPath: '/tasks/annotate'
+      preLoaderRoute: typeof LayoutprotectedTasksAnnotateImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/(public)/contact/': {
-      id: '/_layout/(public)/contact/'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof LayoutpublicContactIndexImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/(public)/features/': {
-      id: '/_layout/(public)/features/'
-      path: '/features'
-      fullPath: '/features'
-      preLoaderRoute: typeof LayoutpublicFeaturesIndexImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/(public)/login/': {
-      id: '/_layout/(public)/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LayoutpublicLoginIndexImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/(public)/sign-up/': {
-      id: '/_layout/(public)/sign-up/'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof LayoutpublicSignUpIndexImport
+    '/_layout/(protected)/tasks/': {
+      id: '/_layout/(protected)/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof LayoutprotectedTasksIndexImport
       parentRoute: typeof LayoutImport
     }
   }
@@ -167,24 +196,28 @@ interface LayoutRouteChildren {
   LayoutprotectedDashboardRoute: typeof LayoutprotectedDashboardRoute
   LayoutprotectedProfileRoute: typeof LayoutprotectedProfileRoute
   LayoutprotectedSpeechToTextRoute: typeof LayoutprotectedSpeechToTextRoute
+  LayoutpublicAboutRoute: typeof LayoutpublicAboutRoute
+  LayoutpublicContactRoute: typeof LayoutpublicContactRoute
+  LayoutpublicFeaturesRoute: typeof LayoutpublicFeaturesRoute
+  LayoutpublicLoginRoute: typeof LayoutpublicLoginRoute
+  LayoutpublicSignUpRoute: typeof LayoutpublicSignUpRoute
   LayoutpublicIndexRoute: typeof LayoutpublicIndexRoute
-  LayoutpublicAboutIndexRoute: typeof LayoutpublicAboutIndexRoute
-  LayoutpublicContactIndexRoute: typeof LayoutpublicContactIndexRoute
-  LayoutpublicFeaturesIndexRoute: typeof LayoutpublicFeaturesIndexRoute
-  LayoutpublicLoginIndexRoute: typeof LayoutpublicLoginIndexRoute
-  LayoutpublicSignUpIndexRoute: typeof LayoutpublicSignUpIndexRoute
+  LayoutprotectedTasksAnnotateRoute: typeof LayoutprotectedTasksAnnotateRoute
+  LayoutprotectedTasksIndexRoute: typeof LayoutprotectedTasksIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutprotectedDashboardRoute: LayoutprotectedDashboardRoute,
   LayoutprotectedProfileRoute: LayoutprotectedProfileRoute,
   LayoutprotectedSpeechToTextRoute: LayoutprotectedSpeechToTextRoute,
+  LayoutpublicAboutRoute: LayoutpublicAboutRoute,
+  LayoutpublicContactRoute: LayoutpublicContactRoute,
+  LayoutpublicFeaturesRoute: LayoutpublicFeaturesRoute,
+  LayoutpublicLoginRoute: LayoutpublicLoginRoute,
+  LayoutpublicSignUpRoute: LayoutpublicSignUpRoute,
   LayoutpublicIndexRoute: LayoutpublicIndexRoute,
-  LayoutpublicAboutIndexRoute: LayoutpublicAboutIndexRoute,
-  LayoutpublicContactIndexRoute: LayoutpublicContactIndexRoute,
-  LayoutpublicFeaturesIndexRoute: LayoutpublicFeaturesIndexRoute,
-  LayoutpublicLoginIndexRoute: LayoutpublicLoginIndexRoute,
-  LayoutpublicSignUpIndexRoute: LayoutpublicSignUpIndexRoute,
+  LayoutprotectedTasksAnnotateRoute: LayoutprotectedTasksAnnotateRoute,
+  LayoutprotectedTasksIndexRoute: LayoutprotectedTasksIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -195,24 +228,28 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/profile': typeof LayoutprotectedProfileRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
+  '/about': typeof LayoutpublicAboutRoute
+  '/contact': typeof LayoutpublicContactRoute
+  '/features': typeof LayoutpublicFeaturesRoute
+  '/login': typeof LayoutpublicLoginRoute
+  '/sign-up': typeof LayoutpublicSignUpRoute
   '/': typeof LayoutpublicIndexRoute
-  '/about': typeof LayoutpublicAboutIndexRoute
-  '/contact': typeof LayoutpublicContactIndexRoute
-  '/features': typeof LayoutpublicFeaturesIndexRoute
-  '/login': typeof LayoutpublicLoginIndexRoute
-  '/sign-up': typeof LayoutpublicSignUpIndexRoute
+  '/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/tasks': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/dashboard': typeof LayoutprotectedDashboardRoute
   '/profile': typeof LayoutprotectedProfileRoute
   '/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
+  '/about': typeof LayoutpublicAboutRoute
+  '/contact': typeof LayoutpublicContactRoute
+  '/features': typeof LayoutpublicFeaturesRoute
+  '/login': typeof LayoutpublicLoginRoute
+  '/sign-up': typeof LayoutpublicSignUpRoute
   '/': typeof LayoutpublicIndexRoute
-  '/about': typeof LayoutpublicAboutIndexRoute
-  '/contact': typeof LayoutpublicContactIndexRoute
-  '/features': typeof LayoutpublicFeaturesIndexRoute
-  '/login': typeof LayoutpublicLoginIndexRoute
-  '/sign-up': typeof LayoutpublicSignUpIndexRoute
+  '/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/tasks': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRoutesById {
@@ -221,12 +258,14 @@ export interface FileRoutesById {
   '/_layout/(protected)/dashboard': typeof LayoutprotectedDashboardRoute
   '/_layout/(protected)/profile': typeof LayoutprotectedProfileRoute
   '/_layout/(protected)/speech-to-text': typeof LayoutprotectedSpeechToTextRoute
+  '/_layout/(public)/about': typeof LayoutpublicAboutRoute
+  '/_layout/(public)/contact': typeof LayoutpublicContactRoute
+  '/_layout/(public)/features': typeof LayoutpublicFeaturesRoute
+  '/_layout/(public)/login': typeof LayoutpublicLoginRoute
+  '/_layout/(public)/sign-up': typeof LayoutpublicSignUpRoute
   '/_layout/(public)/': typeof LayoutpublicIndexRoute
-  '/_layout/(public)/about/': typeof LayoutpublicAboutIndexRoute
-  '/_layout/(public)/contact/': typeof LayoutpublicContactIndexRoute
-  '/_layout/(public)/features/': typeof LayoutpublicFeaturesIndexRoute
-  '/_layout/(public)/login/': typeof LayoutpublicLoginIndexRoute
-  '/_layout/(public)/sign-up/': typeof LayoutpublicSignUpIndexRoute
+  '/_layout/(protected)/tasks/annotate': typeof LayoutprotectedTasksAnnotateRoute
+  '/_layout/(protected)/tasks/': typeof LayoutprotectedTasksIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -236,35 +275,41 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/profile'
     | '/speech-to-text'
-    | '/'
     | '/about'
     | '/contact'
     | '/features'
     | '/login'
     | '/sign-up'
+    | '/'
+    | '/tasks/annotate'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
     | '/profile'
     | '/speech-to-text'
-    | '/'
     | '/about'
     | '/contact'
     | '/features'
     | '/login'
     | '/sign-up'
+    | '/'
+    | '/tasks/annotate'
+    | '/tasks'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/(protected)/dashboard'
     | '/_layout/(protected)/profile'
     | '/_layout/(protected)/speech-to-text'
+    | '/_layout/(public)/about'
+    | '/_layout/(public)/contact'
+    | '/_layout/(public)/features'
+    | '/_layout/(public)/login'
+    | '/_layout/(public)/sign-up'
     | '/_layout/(public)/'
-    | '/_layout/(public)/about/'
-    | '/_layout/(public)/contact/'
-    | '/_layout/(public)/features/'
-    | '/_layout/(public)/login/'
-    | '/_layout/(public)/sign-up/'
+    | '/_layout/(protected)/tasks/annotate'
+    | '/_layout/(protected)/tasks/'
   fileRoutesById: FileRoutesById
 }
 
@@ -295,12 +340,14 @@ export const routeTree = rootRoute
         "/_layout/(protected)/dashboard",
         "/_layout/(protected)/profile",
         "/_layout/(protected)/speech-to-text",
+        "/_layout/(public)/about",
+        "/_layout/(public)/contact",
+        "/_layout/(public)/features",
+        "/_layout/(public)/login",
+        "/_layout/(public)/sign-up",
         "/_layout/(public)/",
-        "/_layout/(public)/about/",
-        "/_layout/(public)/contact/",
-        "/_layout/(public)/features/",
-        "/_layout/(public)/login/",
-        "/_layout/(public)/sign-up/"
+        "/_layout/(protected)/tasks/annotate",
+        "/_layout/(protected)/tasks/"
       ]
     },
     "/_layout/(protected)/dashboard": {
@@ -315,28 +362,36 @@ export const routeTree = rootRoute
       "filePath": "_layout/(protected)/speech-to-text.tsx",
       "parent": "/_layout"
     },
+    "/_layout/(public)/about": {
+      "filePath": "_layout/(public)/about.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/contact": {
+      "filePath": "_layout/(public)/contact.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/features": {
+      "filePath": "_layout/(public)/features.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/login": {
+      "filePath": "_layout/(public)/login.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/(public)/sign-up": {
+      "filePath": "_layout/(public)/sign-up.tsx",
+      "parent": "/_layout"
+    },
     "/_layout/(public)/": {
       "filePath": "_layout/(public)/index.tsx",
       "parent": "/_layout"
     },
-    "/_layout/(public)/about/": {
-      "filePath": "_layout/(public)/about/index.tsx",
+    "/_layout/(protected)/tasks/annotate": {
+      "filePath": "_layout/(protected)/tasks/annotate.tsx",
       "parent": "/_layout"
     },
-    "/_layout/(public)/contact/": {
-      "filePath": "_layout/(public)/contact/index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/(public)/features/": {
-      "filePath": "_layout/(public)/features/index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/(public)/login/": {
-      "filePath": "_layout/(public)/login/index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/(public)/sign-up/": {
-      "filePath": "_layout/(public)/sign-up/index.tsx",
+    "/_layout/(protected)/tasks/": {
+      "filePath": "_layout/(protected)/tasks/index.tsx",
       "parent": "/_layout"
     }
   }

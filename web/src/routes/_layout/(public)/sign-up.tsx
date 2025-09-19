@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import LandingPage from '../../../features/_landing/index'
+import SignUp from '@/features/auth/components/sign-up'
 import PublicLayout from '@/shared/layouts/public';
 
 
@@ -7,16 +7,15 @@ const RouteComponent = () => {
   return (
     <>
       <PublicLayout>
-        <LandingPage />
+        <SignUp />
       </PublicLayout>
     </>
   );
 };
 
-export const Route = createFileRoute('/_layout/(public)/')({
+export const Route = createFileRoute('/_layout/(public)/sign-up')({
   component: RouteComponent,
 })
-
 
 
 

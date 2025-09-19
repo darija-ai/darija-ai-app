@@ -1,150 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Home,
-  Settings,
-  FileText,
-  ChevronLeft,
-  ChevronRight,
-  LogOut,
-  LucideIcon,
-  User
-} from 'lucide-react';
+import { Home, Settings, FileText, LogOut, User } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
-import { signOut } from '../../features/auth/api/authApi';
 
-interface MenuItem {
-  icon: LucideIcon;
-  label: string;
-  href: string;
-}
-
-interface SidebarProps {
-  className?: string;
-}
-
-interface User {
-  username?: string;
-  email?: string;
-  role?: string;
-}
-
-const AppSidebar: React.FC<SidebarProps> = ({ className = '' }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [username, setUsername] = useState('User');
-  const [email, setEmail] = useState('user@example.com');
-  const [role, setRole] = useState('Annotator');
+const AppSidebar = ({ className = '' }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      try {
-        const parsedUser: User = JSON.parse(userString)
-        if (parsedUser.username) setUsername(parsedUser.username);
-        if (parsedUser.email) setEmail(parsedUser.email);
-        if (parsedUser.role) setRole(parsedUser.role);
-      } catch (error) {
-        console.error('Error decoding token:', error);
-      }
-    }
-  }, []);
-
-  const toggleExpanded = () => setIsExpanded(!isExpanded);
-
-  const handleLogout = async () => {
-    // await signOut();
-    window.dispatchEvent(new Event('authChanged'));
-    navigate({ to: '/' });
-  };
-
-  const menuItems: MenuItem[] = [
+  const menuItems = [
     { icon: Home, label: 'Dashboard', href: '/dashboard' },
-    { icon: FileText, label: 'Speech To Text', href: '/speech-to-text' },
+    { icon: FileText, label: 'Annotation Work', href: '/tasks' },
     { icon: Settings, label: 'Settings', href: '#' },
     { icon: User, label: 'Profile', href: '/profile' },
   ];
 
   return (
-    <nav className={`
-      h-screen transition-all duration-500 ease-in-out
-      ${isExpanded ? 'w-72' : 'w-24'}
-      bg-slate-900 flex flex-col ${className}
-    `}>
-      <div className="flex items-center p-4 border-b border-orange-50">
-        <div className={`transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
-          <h2 className="text-white text-xl font-bold whitespace-nowrap text-center">Darija AI</h2>
+    <nav className={`h-screen w-72 flex flex-col ${className}`}>
+      <div className="p-4 mt-4 px-3">
+        <div className="pl-3">
+          <div className="text-white ml-4">
+            <img
+              src="/logo.webp"
+              width={60}
+              className="invert hover:opacity-50"
+              onClick={() => navigate({ to: '/' })}
+            />
+          </div>
         </div>
-        <button
-          onClick={toggleExpanded}
-          className={`p-1 rounded text-white hover:bg-[#2d4a66] transition-colors ml-auto ${!isExpanded ? 'mx-auto' : ''}`}
-        >
-          {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-        </button>
       </div>
 
-      <div className="flex-1 py-4">
-        <ul className="space-y-2 px-3">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <a
-                href={item.href}
-                className={`flex items-center px-3 py-3 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200 ${!isExpanded ? 'justify-center' : 'justify-start'
-                  }`}
-                title={!isExpanded ? item.label : ''}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate({ to: item.href });
-                }}
-              >
-                <item.icon size={20} className="flex-shrink-0" />
-                <span className={`ml-3 truncate transition-all duration-300 overflow-hidden ${!isExpanded ? 'w-0 opacity-0' : 'w-auto opacity-100'
-                  }`}>
-                  {item.label}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div className="flex-1 py-4 px-3 mt-10">
+        {menuItems.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => navigate({ to: item.href })}
+            className="w-full flex items-center px-3 py-3 mb-2 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-colors"
+          >
+            <item.icon size={20} />
+            <span className="ml-3">{item.label}</span>
+          </button>
+        ))}
       </div>
 
-      <div className="p-4 border-t border-border-orange-50">
-        {isExpanded ? (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center min-w-0 flex-1">
-              <div className="w-8 h-8 bg-gray-400 rounded-full flex-shrink-0 flex items-center justify-center">
-                <span className="text-white text-sm font-medium">
-                  {username.charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div className="ml-3 min-w-0">
-                <p className="text-white text-sm font-medium truncate whitespace-nowrap">
-                  {username}
-                </p>
-                <p className="text-gray-400 text-xs truncate whitespace-nowrap">
-                  {role}
-                </p>
-              </div>
+      <div className="p-4 border-t border-orange-50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm">U</span>
             </div>
-
-            <button
-              onClick={handleLogout}
-              className="p-2 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200 flex-shrink-0 ml-2"
-              title="Logout"
-            >
-              <LogOut size={16} />
-            </button>
+            <div className="ml-3">
+              <p className="text-white text-sm">User</p>
+              <p className="text-gray-400 text-xs">Annotator</p>
+            </div>
           </div>
-        ) : (
-          <div className="flex justify-center">
-            <button
-              onClick={handleLogout}
-              className="p-2 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-all duration-200"
-              title="Logout"
-            >
-              <LogOut size={20} />
-            </button>
-          </div>
-        )}
+          <button
+            onClick={() => navigate({ to: '/' })}
+            className="p-2 rounded-lg text-gray-300 hover:bg-[#2d4a66] hover:text-white transition-colors"
+            title="Logout"
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
       </div>
     </nav>
   );
